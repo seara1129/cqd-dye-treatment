@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CQDs in UV/H₂O₂ Dye Treatment</title>
+<meta name="description" content="Lab photos, every data point, extra charts and a 3D model behind the poster: do carbon quantum dots speed up UV/H₂O₂ breakdown of methylene blue?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #e9eff9;
+    --card: #ffffff;
+    --ink: #1b2433;
+    --ink-2: #4a5568;
+    --ink-3: #6b7587;
+    --navy: #2b4a8b;
+    --bar: #8fb0e3;
+    --line: #d5dfef;
+    --hero-a: #4f78c0;
+    --hero-b: #8fb0e3;
+    --cqd: #6f9cf0;
+    --ncqd: #2a50ad;
+    --ctrl: #8b95a5;
+    --day1: #1f9a8a;
+    --day2: #d9731f;
+    --violet: #7a5ccf;
+    --placeholder: #f3f6fb;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 Roboto, system-ui, sans-serif; }
+  h1, h2, h3 { font-family: "Roboto Condensed", Roboto, sans-serif; line-height: 1.2; }
+  h3 { font-size: 20px; margin: 0 0 6px; }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--navy); }
+  sub { line-height: 0; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px;
+    font: 700 15px Roboto, sans-serif; text-decoration: none; border: 2px solid transparent; cursor: pointer;
+  }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .btn-solid { background: var(--navy); color: #fff; }
+  .btn-solid:hover { background: #213b72; }
+  .btn-light { background: #fff; color: var(--navy); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.7); }
+  .btn-outline { background: #fff; color: var(--navy); border-color: var(--line); }
+  .btn-outline:hover { border-color: var(--navy); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative; overflow: hidden; color: #fff; text-align: center;
+    background: linear-gradient(135deg, var(--hero-a), var(--hero-b)); padding: 44px 16px 40px;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; opacity: .3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='3'%3E%3Cpath d='M30 2 L60 2 L75 28 L60 54 L30 54 L15 28 Z'/%3E%3Cpath d='M90 54 L120 54 L135 80 L120 106 L90 106 L75 80 Z'/%3E%3Cpath d='M-30 54 L0 54 L15 80 L0 106 L-30 106 L-45 80 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero > * { position: relative; }
+  .hero .logo { width: 160px; margin: 0 auto 18px; mix-blend-mode: screen; }
+  .hero h1 { font-size: clamp(30px, 6vw, 54px); margin: 0 0 12px; text-shadow: 0 2px 10px rgba(30,50,100,.25); }
+  .hero p.rq { font: 700 clamp(17px, 2.6vw, 23px)/1.35 "Roboto Condensed", sans-serif; max-width: 800px; margin: 0 auto 10px; }
+  .hero .meta { font-size: 14px; opacity: .92; margin: 0 0 22px; }
+  .hero .ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- sticky nav ---------- */
+  nav.toc { position: sticky; top: 0; z-index: 10; background: rgba(43,74,139,.97); box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  nav.toc .wrap { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; padding: 0 8px; }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+  nav.toc ul::-webkit-scrollbar { display: none; }
+  nav.toc a.nl { display: block; white-space: nowrap; padding: 14px 11px; color: #dbe6fb; text-decoration: none; font: 500 15px "Roboto Condensed", sans-serif; border-bottom: 3px solid transparent; }
+  nav.toc a.nl b { color: #fff; margin-right: 4px; }
+  nav.toc a.nl.active, nav.toc a.nl:hover { color: #fff; border-bottom-color: #9cc0ff; }
+  nav.toc .dl { flex: none; margin-left: 8px; padding: 7px 14px; font-size: 14px; }
+  @media (max-width: 600px) { nav.toc .dl span { display: none; } nav.toc .dl { padding: 8px 10px; } }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 0 16px 56px; }
+
+  /* ---------- section headers (poster style) ---------- */
+  section { padding-top: 40px; }
+  .sh { display: flex; align-items: center; margin: 0 0 8px; }
+  .sh .hex {
+    flex: none; width: 58px; height: 52px; display: grid; place-items: center; z-index: 1;
+    background: var(--navy); color: #fff; font: 700 26px "Roboto Condensed", sans-serif;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  }
+  .sh h2 { flex: 1; margin: 0 0 0 -20px; padding: 10px 18px 10px 34px; font-size: clamp(22px, 3.2vw, 32px); font-weight: 400; background: var(--bar); color: #fff; border-radius: 0 999px 999px 0; }
+  .lede { color: var(--ink-2); margin: 0 0 18px; max-width: 760px; }
+
+  .card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: 0 1px 2px rgba(20,40,80,.06); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+  .stack > * + * { margin-top: 18px; }
+  figcaption { font-size: 14px; color: var(--ink-2); margin-top: 10px; }
+  .zoom { cursor: zoom-in; border-radius: 10px; }
+  .note { font-size: 13px; color: #7a5200; background: #fff6e0; border-radius: 8px; padding: 6px 10px; margin: 10px 0 0; }
+
+  .placeholder {
+    display: grid; place-items: center; text-align: center; padding: 16px; min-height: 200px; height: 100%;
+    background: var(--placeholder); border: 2px dashed #b3c4e2; border-radius: 10px; color: var(--ink-3); font-size: 14px;
+  }
+  .placeholder strong { display: block; color: var(--ink-2); font-size: 15px; }
+
+  /* ---------- 1 overview ---------- */
+  .overview { display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: 22px; align-items: start; }
+  @media (max-width: 620px) { .overview { grid-template-columns: 1fr; } }
+  .poster-thumb { display: block; position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 6px 20px rgba(20,40,80,.18); }
+  .poster-thumb span { position: absolute; inset: auto 0 0 0; background: rgba(27,36,51,.82); color: #fff; padding: 10px; font: 700 14px Roboto, sans-serif; text-align: center; }
+  @media (max-width: 620px) { .poster-thumb { max-width: 160px; margin: 0 auto; } }
+  .glance { display: grid; gap: 12px; }
+  .glance div { background: var(--card); border-radius: var(--radius); padding: 14px 18px; border-left: 5px solid var(--navy); }
+  .glance h4 { margin: 0 0 2px; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+  .glance p { margin: 0; font-weight: 500; }
+  .adds { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .adds a { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #dbe6f8; color: var(--navy); font-size: 14px; font-weight: 500; text-decoration: none; }
+  .adds a:hover { background: #c9d9f4; }
+
+  /* ---------- 2 lab timeline ---------- */
+  .timeline { position: relative; }
+  .tl-step { display: grid; grid-template-columns: 1fr 1.1fr; gap: 22px; align-items: center; background: var(--card); border-radius: var(--radius); padding: 16px; }
+  .tl-step + .tl-step { margin-top: 16px; }
+  .tl-step:nth-child(even) .tl-media { order: 2; }
+  .tl-media img, .tl-media .placeholder { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 10px; min-height: 0; }
+  .tl-num { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; font-size: 14px; margin-right: 8px; vertical-align: 2px; }
+  .tl-body p { margin: 6px 0 0; }
+  .labnote { margin-top: 10px; padding: 8px 12px; border-left: 3px solid var(--bar); background: #f5f8fd; color: var(--ink-2); font-size: 14px; font-style: italic; }
+  @media (max-width: 620px) { .tl-step { grid-template-columns: 1fr; } .tl-step:nth-child(even) .tl-media { order: 0; } }
+
+  /* ---------- 3 3D model ---------- */
+  .stage {
+    position: relative; min-height: 380px; border-radius: var(--radius); overflow: hidden;
+    background: radial-gradient(circle at 50% 40%, #2c4a86, #101b33 75%); color: #dbe6fb;
+    display: grid; place-items: center; text-align: center; padding: 24px;
+  }
+  .stage svg.spin { width: 180px; height: 180px; animation: spin 18s linear infinite; filter: drop-shadow(0 0 18px rgba(120,255,170,.45)); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .stage svg.spin { animation: none; } }
+  .stage p { margin: 14px auto 0; max-width: 460px; font-size: 15px; }
+  .stage .tag { display: inline-block; margin-top: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.12); font-size: 13px; }
+
+  /* ---------- 4 data explorer ---------- */
+  .tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-bottom: 14px; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button {
+    flex: none; padding: 9px 15px; border-radius: 999px; border: 2px solid var(--line); background: #fff; color: var(--ink-2);
+    font: 500 14px Roboto, sans-serif; cursor: pointer; white-space: nowrap;
+  }
+  .tabs button[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .tabs button .new { font-size: 11px; font-weight: 700; margin-left: 6px; padding: 1px 6px; border-radius: 6px; background: #ffe2c6; color: #8a3d00; }
+  .tabs button[aria-selected="true"] .new { background: #fff; }
+  .panel[hidden] { display: none; }
+  .panel-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 22px; }
+  @media (max-width: 860px) { .panel-grid { grid-template-columns: 1fr; } }
+  .chart-title { font: 700 18px "Roboto Condensed", sans-serif; margin: 0 0 8px; }
+  .chartbox { position: relative; height: 340px; }
+  .why h4 { margin: 0 0 4px; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+  .why p { margin: 0 0 14px; }
+  .from-poster { font-size: 13px; color: var(--ink-3); }
+
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  thead th { background: var(--bar); color: #fff; font-family: "Roboto Condensed", sans-serif; font-size: 15px; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.miss { color: #b07a00; }
+  tbody tr:hover { background: #f5f8fd; }
+  .table-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .table-head h3 { margin: 0; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+  .shots img { width: 100%; aspect-ratio: 16/10; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+  .shots figcaption { margin-top: 6px; font-size: 13px; }
+
+  /* ---------- 5 contact ---------- */
+  .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .person { text-align: center; }
+  .avatar { width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(135deg, var(--hero-a), var(--bar)); color: #fff; display: grid; place-items: center; font: 700 32px "Roboto Condensed", sans-serif; margin: 0 auto; border: 4px solid #fff; box-shadow: 0 4px 14px rgba(20,40,80,.15); }
+  .person h3 { font-size: 22px; margin: 12px 0 2px; }
+  .person .role { color: var(--ink-3); font-size: 14px; margin: 0 0 14px; }
+  @media (max-width: 760px) {
+    .team { grid-template-columns: 1fr; gap: 12px; }
+    .person { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; text-align: left; padding: 14px 16px; }
+    .person .avatar { width: 64px; height: 64px; font-size: 22px; border-width: 3px; }
+    .person h3 { margin: 0; font-size: 19px; }
+    .person .role { margin: 0 0 8px; }
+    .person .btn { padding: 8px 14px; font-size: 14px; }
+  }
+
+  .refs { padding: 0; margin: 0; }
+  .refs li { margin-bottom: 10px; font-size: 14px; padding-left: 1.5em; text-indent: -1.5em; list-style: none; }
+
+  footer { background: var(--navy); color: #c9d8f3; text-align: center; font-size: 14px; padding: 26px 16px 34px; }
+  footer a { color: #fff; }
+
+  dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 92vh; }
+  dialog::backdrop { background: rgba(10,20,40,.85); }
+  dialog img { max-width: 96vw; max-height: 92vh; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+</svg>
+
+<header class="hero">
+  <img class="logo" src="img/logo.png" alt="John Monash Science School">
+  <h1>Carbon Quantum Dots in UV/H<sub>2</sub>O<sub>2</sub> Dye Treatment</h1>
+  <p class="rq">How does adding CQDs or N-CQDs affect the breakdown of methylene blue by H<sub>2</sub>O<sub>2</sub> and UV light?</p>
+  <p class="meta">Seara Ng, Tian Yu &amp; Jun Qi Lee · Australian Science Fair</p>
+  <div class="ctas">
+    <a class="btn btn-light" href="poster.pdf" download="CQD-dye-treatment-poster.pdf"><svg><use href="#i-dl"/></svg>Download poster (PDF, 1.3 MB)</a>
+    <a class="btn btn-ghost" href="#data"><svg><use href="#i-down"/></svg>Data</a>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <ul>
+      <li><a class="nl" href="#poster"><b>1</b>Poster</a></li>
+      <li><a class="nl" href="#lab"><b>2</b>Lab work</a></li>
+      <li><a class="nl" href="#model"><b>3</b>3D model</a></li>
+      <li><a class="nl" href="#data"><b>4</b>Data</a></li>
+      <li><a class="nl" href="#contact"><b>5</b>Contact</a></li>
+      <li><a class="nl" href="#references"><b>6</b>References</a></li>
+    </ul>
+    <a class="btn btn-light dl" href="poster.pdf" download="CQD-dye-treatment-poster.pdf" aria-label="Download poster PDF"><svg><use href="#i-dl"/></svg><span>Poster</span></a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 1 OVERVIEW -->
+  <section id="poster">
+    <div class="sh"><span class="hex">1</span><h2>Poster</h2></div>
+    <p class="lede">A small overview of the project. Full background, discussion and limitations are in the poster PDF.</p>
+    <div class="overview">
+      <a class="poster-thumb" href="poster.pdf" target="_blank" rel="noopener">
+        <img src="img/poster-thumb.jpg" alt="Thumbnail of the full research poster" width="795" height="1124">
+        <span>Open full poster (PDF)</span>
+      </a>
+      <div>
+        <div class="glance">
+          <div><h4>Research question</h4><p>Whether cheap, microwave-made carbon dots (plain and nitrogen-doped) speed up UV/H₂O₂ breakdown of a textile dye.</p></div>
+          <div><h4>Results</h4><p>CQD samples read higher absorbance (0.29–0.31) than the H₂O₂-only control (0.18), the opposite of what we expected.</p></div>
+          <div><h4>Main takeaway</h4><p>The CQDs' own colour at 450 nm masked the dye. Next time: measure at 664 nm with CQD-only blanks.</p></div>
+        </div>
+        <ul class="adds" aria-label="What this site adds">
+          <li><a href="#lab">Lab photos</a></li>
+          <li><a href="#model">3D model</a></li>
+          <li><a href="#data">Every data point</a></li>
+          <li><a href="#data">4 extra charts</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 IN THE LAB -->
+  <section id="lab">
+    <div class="sh"><span class="hex">2</span><h2>Lab work</h2></div>
+    <p class="lede">Detailed steps + observations</p>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-media"><div class="placeholder"><div><strong>Photo: microwaving the precursor</strong>citric acid + water, 8 min</div></div></div>
+        <div class="tl-body">
+          <h3><span class="tl-num">1</span>Making the carbon dots</h3>
+          <p>2 g citric acid dissolved in 20 mL water, then microwaved for 8 minutes.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-media"><img class="zoom" src="img/cqd-solutions.jpg" alt="Dark N-CQD solution beside yellow CQD solution"></div>
+        <div class="tl-body">
+          <h3><span class="tl-num">2</span>The nitrogen-doped batch</h3>
+          <p>Same recipe plus 4 g urea, microwaved in 30-second bursts for 3 minutes. The result (left) was much darker than plain CQDs (right).</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-media"><img class="zoom" src="img/fluorescence.jpg" alt="Beakers glowing bright green under UV light"></div>
+        <div class="tl-body">
+          <h3><span class="tl-num">3</span>Checking they glow</h3>
+          <p>Under a UV torch the samples fluoresced bright green, a sign that carbon dots had formed.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-media"><img class="zoom" src="img/standard-solution.jpg" loading="lazy" alt="Labelled beakers of methylene blue solution in the UV box"></div>
+        <div class="tl-body">
+          <h3><span class="tl-num">4</span>Dosing the dye</h3>
+          <p>50 mL of 10 ppm methylene blue per beaker, with 1 mL H₂O₂ and 0–3 mL of CQD or N-CQD solution.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-media"><img class="zoom" src="img/empty-dark-box.jpg" loading="lazy" alt="The cardboard dark box used for the 30-minute UV exposure, with the UV torch beside it"></div>
+        <div class="tl-body">
+          <h3><span class="tl-num">5</span>30 minutes under UV</h3>
+          <p>Each beaker sat under a handheld UV torch inside a closed dark box for 30 minutes.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-media"><img class="zoom" src="img/ncqd-after-uv.jpg" loading="lazy" alt="Three N-CQD beakers, numbered 1 to 3, after 30 minutes under UV"></div>
+        <div class="tl-body">
+          <h3><span class="tl-num">6</span>Measuring absorbance</h3>
+          <p>A colorimeter read absorbance on six colour channels from 450 to 650 nm. Methylene blue shows up best on the 650 nm (red) channel, closest to its 664 nm peak (see the <a href="#data" data-tab="fingerprint">Colour fingerprint</a> chart).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 3D MODEL -->
+  <section id="model">
+    <div class="sh"><span class="hex">3</span><h2>See it in 3D</h2></div>
+    <p class="lede">Drag to rotate, pinch or scroll to zoom.</p>
+    <div class="stage">
+      <div>
+        <svg class="spin" viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="none" stroke="#7dffb0" stroke-width="3" stroke-linejoin="round" opacity=".9">
+            <path d="M100 40 126 55v30l-26 15-26-15V55z"/><path d="M126 85l26 15v30l-26 15-26-15v-30z"/><path d="M74 85l26 15v30l-26 15-26-15v-30z"/>
+            <path d="M100 130l26 15v30l-26 15-26-15v-30z" opacity=".55"/><path d="M152 40l26 15v30l-26 15-26-15V55z" opacity=".55"/><path d="M48 40l26 15v30L48 100 22 85V55z" opacity=".55"/>
+          </g>
+        </svg>
+        <p><b>3D model / animation coming soon.</b><br>Placeholder: send a .glb file (3D model) or .mp4 (animation) and it goes here.</p>
+        <span class="tag">Preview only</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 DATA EXPLORER -->
+  <section id="data">
+    <div class="sh"><span class="hex">4</span><h2>Data</h2></div>
+    <div class="stack" style="margin-top:16px">
+      <div class="card">
+        <div class="tabs" role="tablist" aria-label="Charts">
+          <button role="tab" aria-selected="true" data-tab="removed">Dye removed<span class="new">NEW</span></button>
+          <button role="tab" aria-selected="false" data-tab="fingerprint">Colour fingerprint<span class="new">NEW</span></button>
+          <button role="tab" aria-selected="false" data-tab="ncqd">N-CQD before/after<span class="new">NEW</span></button>
+          <button role="tab" aria-selected="false" data-tab="detector">Detector limit<span class="new">NEW</span></button>
+          <button role="tab" aria-selected="false" data-tab="fig2">Poster Fig. 2</button>
+          <button role="tab" aria-selected="false" data-tab="fig3">Poster Fig. 3</button>
+        </div>
+
+        <div class="panel" data-panel="removed">
+          <div class="panel-grid">
+            <div><p class="chart-title">How much methylene blue was removed after 30 min UV</p><div class="chartbox"><canvas id="c-removed" role="img" aria-label="Bar chart of percent methylene blue removed for each treatment"></canvas></div></div>
+            <div class="why">
+              <h4>Description</h4><p>Percent of methylene blue removed, from the 650 nm reading and corrected for dilution by the added H₂O₂ and CQD. Whiskers = ±1 SD of 3 repeats; the 1–3 mL CQD beakers were single trials.</p>
+              <h4>Explanation</h4><p>H₂O₂ and UV alone removed about half the dye (51%). With plain CQDs added, only 10–12% was removed, and with 6% H₂O₂ plus CQD there was no measurable removal. Under these conditions the CQDs seem to have slowed the breakdown.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="fingerprint" hidden>
+          <div class="panel-grid">
+            <div><p class="chart-title">Which colours each sample absorbs</p><div class="chartbox"><canvas id="c-fingerprint" role="img" aria-label="Line chart of absorbance across six wavelengths for three samples"></canvas></div></div>
+            <div class="why">
+              <h4>Description</h4><p>Absorbance on the colorimeter's six colour channels (450–650 nm) for three samples.</p>
+              <h4>Explanation</h4><p>Methylene blue absorbs most at the red end (650 nm), and the plain-CQD sample looks almost the same as the dye alone. The N-CQD sample absorbs strongly at 450 nm (violet), so that channel mostly tracks the N-CQDs, not the dye.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="ncqd" hidden>
+          <div class="panel-grid">
+            <div><p class="chart-title">N-CQD beakers before and after 30 min UV</p><div class="chartbox"><canvas id="c-ncqd" role="img" aria-label="Grouped bar chart of N-CQD beaker absorbance before and after UV"></canvas></div></div>
+            <div class="why">
+              <h4>Description</h4><p>Three beakers of methylene blue + 3% H₂O₂ + 1 mL N-CQD, each measured at 650 nm before and after UV (14 Oct).</p>
+              <h4>Explanation</h4><p>Mean absorbance rose slightly, from 0.739 to 0.761, so no dye was removed. Repeat 1 read high after UV on every channel, possibly from a bubble or smudge.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="detector" hidden>
+          <div class="panel-grid">
+            <div><p class="chart-title">How much light reaches the detector</p><div class="chartbox"><canvas id="c-detector" role="img" aria-label="Curve of percent light transmitted against absorbance, with readings on the 450 nm and 650 nm channels marked"></canvas></div></div>
+            <div class="why">
+              <h4>Description</h4><p>Absorbance is logarithmic: % light transmitted = 100 × 10<sup>−A</sup>. All experimental readings are plotted along this curve, on the 450 nm and 650 nm channels.</p>
+              <h4>Explanation</h4><p>Eight of the twelve N-CQD readings at 450 nm exceed A = 2, meaning less than 1% of light reaches the detector. At this threshold, background noise dominates the signal, making small differences between these readings (like the 0.07–0.14 gap in poster Figure 3) statistically unreliable. At 650 nm, every reading stays below 1.2.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="fig2" hidden>
+          <div class="panel-grid">
+            <div><p class="chart-title">Adding CQDs raised absorbance above the H₂O₂-only control</p><div class="chartbox"><canvas id="c-fig2" role="img" aria-label="Bar chart of absorbance at 650 nm after 30 minutes UV for each condition"></canvas></div></div>
+            <div class="why">
+              <h4>Description</h4><p>Absorbance at 650 nm after 30 min UV. Bars = mean, dots = individual beakers. Grey = no CQD.</p>
+              <p class="from-poster">Discussion of this result is in poster section 4.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="fig3" hidden>
+          <div class="panel-grid">
+            <div><p class="chart-title">N-CQD amount: before and after 30 min UV</p><div class="chartbox"><canvas id="c-fig3" role="img" aria-label="Line chart of 450 nm absorbance before and after UV for 1, 2 and 3 mL N-CQD"></canvas></div></div>
+            <div class="why">
+              <h4>Description</h4><p>1, 2 and 3 mL N-CQD in methylene blue, measured on the 450 nm (violet) channel before H₂O₂ was added and after 30 min UV (15 Oct). Axis does not start at zero.</p>
+              <h4>Explanation</h4><p>After UV, readings were 0.07–0.14 lower. All six readings are above A = 2, where less than 1% of light reaches the detector, so this gap may just be instrument noise.</p>
+              <p class="note">After-UV values are read off the colorimeter screenshot in the prac log (±0.01).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-head">
+          <h3>Raw data</h3>
+          <a class="btn btn-outline" href="data/all-readings.csv" download="cqd-colorimeter-readings.csv"><svg><use href="#i-dl"/></svg>Download all 216 readings (CSV)</a>
+        </div>
+        <p class="from-poster" style="margin:0 0 12px">Mean absorbance at 650 nm for each beaker. The CSV has every reading on all six colour channels.</p>
+        <div class="tablewrap">
+          <table id="raw">
+            <thead><tr><th>Date</th><th>Trial</th><th>Condition</th><th class="num">Rep 1</th><th class="num">Rep 2</th><th class="num">Rep 3</th><th class="num">Mean</th><th class="num">Dye removed</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 4px">Colorimeter screenshots</h3>
+        <p class="from-poster" style="margin:0 0 14px">Raw SPARKvue graphs from the prac log, showing absorbance over time for each sample. Tap to enlarge.</p>
+        <div class="shots">
+          <figure><img class="zoom" src="img/graphs/controls.png" loading="lazy" alt="SPARKvue graph of controls 1 to 3, flat lines between 0.14 and 0.20"><figcaption>Controls #1–3: 3% H₂O₂ only (650 nm)</figcaption></figure>
+          <figure><img class="zoom" src="img/graphs/cqd-amount.png" loading="lazy" alt="SPARKvue graph of CQD conc 1 to 3, flat lines near 0.30"><figcaption>CQD conc #1–3: 1, 2 and 3 mL CQD (650 nm)</figcaption></figure>
+          <figure><img class="zoom" src="img/graphs/h2o2-6pct-cqd.png" loading="lazy" alt="SPARKvue graph of HP conc 1 to 3, flat lines near 0.36"><figcaption>HP conc #1–3: 6% H₂O₂ + 1 mL CQD (650 nm)</figcaption></figure>
+          <figure><img class="zoom" src="img/graphs/h2o2-6pct-only.png" loading="lazy" alt="SPARKvue graph of 6% hydrogen peroxide alone, flat line near 0.02"><figcaption>6% H₂O₂ on its own, check reading (650 nm)</figcaption></figure>
+          <figure><img class="zoom" src="img/graphs/ncqd-14oct.png" loading="lazy" alt="SPARKvue graph of three N-CQD beakers after UV, between 1.8 and 2.05"><figcaption>N-CQD beakers after UV, 14 Oct (450 nm)</figcaption></figure>
+          <figure><img class="zoom" src="img/graphs/ncqd-amount-15oct.png" loading="lazy" alt="SPARKvue graph of 1, 2 and 3 mL N-CQD before and after UV, between 2.1 and 2.95"><figcaption>N-CQD 1–3 mL before and after UV, 15 Oct (450 nm)</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 CONTACT -->
+  <section id="contact">
+    <div class="sh"><span class="hex">5</span><h2>Contact</h2></div>
+    <p class="lede">Feel free to email us for any questions or collaboration.</p>
+    <div class="team">
+      <div class="card person">
+        <div class="avatar" aria-hidden="true">SN</div>
+        <div>
+          <h3>Seara Ng</h3>
+          <a class="btn btn-solid" href="mailto:ng-0034@jmss.vic.edu.au"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+      </div>
+      <div class="card person">
+        <div class="avatar" aria-hidden="true">JL</div>
+        <div>
+          <h3>Jun Qi Lee</h3>
+          <a class="btn btn-solid" href="mailto:lee0111@jmss.vic.edu.au"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+      </div>
+      <div class="card person">
+        <div class="avatar" aria-hidden="true">TY</div>
+        <div>
+          <h3>Tian Yu</h3>
+          <a class="btn btn-solid" href="mailto:yu-0021@jmss.vic.edu.au"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 REFERENCES -->
+  <section id="references">
+    <div class="sh"><span class="hex">6</span><h2>References</h2></div>
+    <div class="card">
+      <ul class="refs">
+        <li>Glaze, W. H., Kang, J.-W., &amp; Chapin, D. H. (1987). The chemistry of water treatment processes involving ozone, hydrogen peroxide and ultraviolet radiation. <i>Ozone: Science &amp; Engineering, 9</i>(4), 335–352.</li>
+        <li>Khan, I., Saeed, K., Zekker, I., Zhang, B., Hendi, A. H., Ahmad, A., Ahmad, S., Zada, N., Ahmad, H., Shah, L. A., Shah, T., &amp; Khan, I. (2022). Review on methylene blue: Its properties, uses, toxicity and photodegradation. <i>Water, 14</i>(2), Article 242.</li>
+        <li>Lim, S. Y., Shen, W., &amp; Gao, Z. (2015). Carbon quantum dots and their applications. <i>Chemical Society Reviews, 44</i>(1), 362–381.</li>
+        <li>Qu, S., Wang, X., Lu, Q., Liu, X., &amp; Wang, L. (2012). A biocompatible fluorescent ink based on water-soluble luminescent carbon nanodots. <i>Angewandte Chemie International Edition, 51</i>(49), 12215–12218. <a href="https://doi.org/10.1002/anie.201206791">doi.org/10.1002/anie.201206791</a></li>
+        <li>Wang, R., Lu, K.-Q., Tang, Z.-R., &amp; Xu, Y.-J. (2017). Recent progress in carbon quantum dots: Synthesis, properties and applications in photocatalysis. <i>Journal of Materials Chemistry A, 5</i>(8), 3717–3734. <a href="https://doi.org/10.1039/c6ta08660h">doi.org/10.1039/c6ta08660h</a></li>
+        <li>Yashwanth, H. J., Rondiya, S. R., Dzade, N. Y., Dhole, S. D., Phase, D. M., &amp; Hareesh, K. (2020). Enhanced photocatalytic activity of N, P, co-doped carbon quantum dots: An insight from experimental and computational approach. <i>Vacuum, 180</i>, 109589.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Seara Ng, Tian Yu &amp; Jun Qi Lee · John Monash Science School · Australian Science Fair<br>
+  <a href="poster.pdf" download="CQD-dye-treatment-poster.pdf">Download the poster (PDF)</a> · <a href="#contact">Contact</a>
+</footer>
+
+<dialog id="lightbox"><img alt=""></dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+/* ===== DATA: from "EEI Data - Organised.xlsx" (SPARKvue colorimeter exports, 13–15 Oct 2026) ===== */
+const DATA = {
+  a0: 0.362,   // A650 of the 10 ppm methylene blue stock
+  mbVol: 50,   // mL of methylene blue per beaker
+  // A650 after 30 min UV, one value per beaker
+  trials: [
+    { id: 'A',  date: '12 Oct', label: '3% H₂O₂ only',        cond: 'MB + 3% H₂O₂ (no CQD)',     total: 51, ctrl: true, reps: [0.2022, 0.1800, 0.1440] },
+    { id: 'B1', date: '12 Oct', label: '1 mL CQD',            cond: 'MB + 3% H₂O₂ + 1 mL CQD',   total: 52, reps: [0.3083] },
+    { id: 'B2', date: '12 Oct', label: '2 mL CQD',            cond: 'MB + 3% H₂O₂ + 2 mL CQD',   total: 53, reps: [0.3071] },
+    { id: 'B3', date: '12 Oct', label: '3 mL CQD',            cond: 'MB + 3% H₂O₂ + 3 mL CQD',   total: 54, reps: [0.2937] },
+    { id: 'C',  date: '13 Oct', label: '6% H₂O₂ + 1 mL CQD',  cond: 'MB + 6% H₂O₂ + 1 mL CQD',   total: 52, reps: [0.3549, 0.3542, 0.3717] }
+  ],
+  // Trial D: same three beakers, A650 before and after 30 min UV (14 Oct)
+  ncqd: { before: [0.7355, 0.7425, 0.7400], after: [0.8357, 0.7178, 0.7293] },
+  // Trial E (15 Oct): 1/2/3 mL N-CQD before H₂O₂ + UV (CSV), and after UV on 450 nm only (read off the prac-log screenshot, ±0.01)
+  ncqdAmount: [{ vol: 1, a650: 0.8107, a450: 2.2565, after450: 2.15 }, { vol: 2, a650: 1.0937, a450: 2.772, after450: 2.63 }, { vol: 3, a650: 1.1652, a450: 2.952, after450: 2.885 }],
+  // mean absorbance on each colour channel
+  wl: [450, 500, 550, 570, 600, 650],
+  spectra: {
+    mb:   [0, 0.0292, 0.0898, 0.145, 0.2497, 0.362],          // 10 ppm stock
+    cqd:  [0.0177, 0.0251, 0.097, 0.1259, 0.2196, 0.3083],    // MB + 1 mL CQD, after UV
+    ncqd: [1.6217, 0.3983, 0.3428, 0.4109, 0.5898, 0.7393]    // MB + 1 mL N-CQD, before UV (mean of 3)
+  },
+  // every trial reading on the 450 nm and 650 nm channels
+  channels: [
+    ['3% H₂O₂ control, rep 1', 0, 0.2022], ['3% H₂O₂ control, rep 2', 0, 0.18], ['3% H₂O₂ control, rep 3', 0.012, 0.144],
+    ['1 mL CQD', 0.0177, 0.3083], ['2 mL CQD', 0.0205, 0.3071], ['3 mL CQD', 0.0165, 0.2937],
+    ['6% H₂O₂ + CQD, rep 1', 0.037, 0.3549], ['6% H₂O₂ + CQD, rep 2', 0.0133, 0.3542], ['6% H₂O₂ + CQD, rep 3', 0.021, 0.3717],
+    ['N-CQD before UV, rep 1', 1.617, 0.7355], ['N-CQD before UV, rep 2', 1.6265, 0.7425], ['N-CQD before UV, rep 3', 1.6215, 0.74],
+    ['N-CQD after UV, rep 1', 2.0237, 0.8357], ['N-CQD after UV, rep 2', 1.8234, 0.7178], ['N-CQD after UV, rep 3', 2.0338, 0.7293],
+    ['1 mL N-CQD before UV (15 Oct)', 2.2565, 0.8107], ['2 mL N-CQD before UV (15 Oct)', 2.772, 1.0937], ['3 mL N-CQD before UV (15 Oct)', 2.952, 1.1652],
+    ['1 mL N-CQD after UV (15 Oct)', 2.15, null], ['2 mL N-CQD after UV (15 Oct)', 2.63, null], ['3 mL N-CQD after UV (15 Oct)', 2.885, null]
+  ]
+};
+
+/* ===== derived numbers ===== */
+const mean = a => a.reduce((s, v) => s + v, 0) / a.length;
+const sd = a => a.length < 2 ? null : Math.sqrt(a.reduce((s, v) => s + (v - mean(a)) ** 2, 0) / (a.length - 1));
+DATA.trials.forEach(t => {
+  const expected = DATA.a0 * DATA.mbVol / t.total;         // dilution-corrected starting absorbance
+  t.mean = mean(t.reps);
+  t.removed = 100 * (1 - t.mean / expected);
+  t.removedSd = sd(t.reps) === null ? null : 100 * sd(t.reps) / expected;
+});
+const nB = mean(DATA.ncqd.before), nA = mean(DATA.ncqd.after);
+const nRemoved = 100 * (1 - nA / nB), nRemovedSd = 100 * sd(DATA.ncqd.after) / nB;
+
+/* ===== raw data table ===== */
+(() => {
+  const f3 = v => v == null ? '–' : v.toFixed(3);
+  const pct = (v, s) => `${v.toFixed(1)}%${s == null ? '' : ` ± ${s.toFixed(1)}`}`;
+  const row = (date, id, cond, reps, m, rem) =>
+    `<tr><td>${date}</td><td>${id}</td><td>${cond}</td>${[0, 1, 2].map(i => `<td class="num">${f3(reps[i])}</td>`).join('')}<td class="num">${f3(m)}</td><td class="num">${rem}</td></tr>`;
+  const rows = DATA.trials.map(t => row(t.date, t.id, t.cond, t.reps, t.mean, pct(t.removed, t.removedSd)));
+  rows.push(row('14 Oct', 'D', 'MB + 3% H₂O₂ + 1 mL N-CQD, before UV', DATA.ncqd.before, nB, '–'));
+  rows.push(row('14 Oct', 'D', 'MB + 3% H₂O₂ + 1 mL N-CQD, after UV', DATA.ncqd.after, nA, pct(nRemoved, nRemovedSd)));
+  DATA.ncqdAmount.forEach(e => rows.push(row('15 Oct', 'E', `MB + ${e.vol} mL N-CQD, before H₂O₂ + UV`, [e.a650], e.a650, '–')));
+  document.querySelector('#raw tbody').innerHTML = rows.join('');
+})();
+
+/* ===== lightbox ===== */
+const lb = document.getElementById('lightbox');
+document.querySelectorAll('img.zoom').forEach(img => img.addEventListener('click', () => {
+  lb.querySelector('img').src = img.src; lb.querySelector('img').alt = img.alt; lb.showModal();
+}));
+lb.addEventListener('click', () => lb.close());
+
+/* ===== active nav ===== */
+const links = [...document.querySelectorAll('nav.toc a.nl')];
+const navList = document.querySelector('nav.toc ul');
+const navObs = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  links.forEach(a => {
+    const on = a.getAttribute('href') === '#' + e.target.id;
+    a.classList.toggle('active', on);
+    if (on) navList.scrollTo({ left: a.parentElement.offsetLeft - (navList.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+  });
+}), { rootMargin: '-40% 0px -55% 0px' });
+document.querySelectorAll('main section').forEach(s => navObs.observe(s));
+
+/* ===== charts ===== */
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const made = {}, builders = {};
+if (window.Chart) {
+  Chart.defaults.font.family = 'Roboto, system-ui, sans-serif';
+  Chart.defaults.color = css('--ink-3');
+  Chart.defaults.maintainAspectRatio = false;
+  const grid = { color: '#e6ecf5' };
+  const tip = { backgroundColor: '#1b2433', padding: 10, cornerRadius: 8, titleFont: { weight: '700' } };
+  const legend = { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8, color: css('--ink-2') } };
+  const bar = { borderRadius: 4, borderSkipped: 'start', maxBarThickness: 52 };
+  const text = (ctx, s, x, y, align = 'center', weight = 500) => { ctx.save(); ctx.fillStyle = css('--ink'); ctx.font = `${weight} 13px Roboto`; ctx.textAlign = align; ctx.fillText(s, x, y); ctx.restore(); };
+  const dot = (ctx, x, y, fill) => { ctx.save(); ctx.beginPath(); ctx.arc(x, y, 4.5, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke(); ctx.restore(); };
+  const whisker = (ctx, x, y0, y1) => { ctx.save(); ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.moveTo(x - 6, y0); ctx.lineTo(x + 6, y0); ctx.moveTo(x - 6, y1); ctx.lineTo(x + 6, y1); ctx.stroke(); ctx.restore(); };
+
+  builders.removed = () => {
+    const T = DATA.trials;
+    return new Chart(document.getElementById('c-removed'), {
+      type: 'bar',
+      data: { labels: T.map(t => t.label), datasets: [{ data: T.map(t => t.removed), backgroundColor: T.map(t => t.ctrl ? css('--ctrl') : css('--cqd')), ...bar }] },
+      options: {
+        plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
+          label: c => `${c.parsed.y.toFixed(1)}% of dye removed`,
+          afterLabel: c => { const t = T[c.dataIndex]; return t.removedSd == null ? '1 beaker' : `± ${t.removedSd.toFixed(1)}% (SD, 3 beakers)`; }
+        }}},
+        scales: {
+          y: { min: -10, max: 70, grid: { color: c => c.tick.value === 0 ? '#9aa6b8' : '#e6ecf5' }, title: { display: true, text: '% of methylene blue removed' }, ticks: { stepSize: 10, callback: v => v + '%' } },
+          x: { grid: { display: false } }
+        }
+      },
+      plugins: [{ id: 'lbl', afterDatasetsDraw(ch) {
+        const { ctx, scales: { y } } = ch;
+        ch.getDatasetMeta(0).data.forEach((b, i) => {
+          const t = T[i]; let top = Math.min(b.y, b.base);
+          if (t.removedSd != null) {
+            const y0 = y.getPixelForValue(t.removed - t.removedSd), y1 = y.getPixelForValue(t.removed + t.removedSd);
+            whisker(ctx, b.x, y0, y1); top = Math.min(top, y1);
+          }
+          text(ctx, `${Math.round(t.removed)}%`, b.x, top - 8, 'center', 700);
+        });
+      }}]
+    });
+  };
+
+  builders.fingerprint = () => {
+    const S = DATA.spectra, pts = a => DATA.wl.map((x, i) => ({ x, y: a[i] }));
+    const line = (label, d, c, dash) => ({ label, data: pts(d), showLine: true, borderColor: c, backgroundColor: c, borderWidth: 2, borderDash: dash || [], pointRadius: 4.5, pointHoverRadius: 7, pointBorderColor: '#fff', pointBorderWidth: 2 });
+    return new Chart(document.getElementById('c-fingerprint'), {
+      type: 'scatter',
+      data: { datasets: [
+        line('Dye only (10 ppm stock)', S.mb, css('--day1')),
+        line('Dye + 1 mL plain CQD, after UV', S.cqd, css('--cqd'), [6, 4]),
+        line('Dye + 1 mL N-CQD, before UV', S.ncqd, css('--ncqd'))
+      ]},
+      options: {
+        interaction: { mode: 'index', intersect: false },
+        plugins: { legend: { ...legend, align: 'start' }, tooltip: { ...tip, callbacks: {
+          title: it => `${it[0].parsed.x} nm channel`,
+          label: c => `${c.dataset.label}: ${c.parsed.y.toFixed(3)}`
+        }}},
+        scales: {
+          x: { type: 'linear', min: 440, max: 660, grid, title: { display: true, text: 'Colorimeter channel (nm)' },
+               afterBuildTicks: ax => { ax.ticks = DATA.wl.map(v => ({ value: v })); }, ticks: { autoSkip: false } },
+          y: { min: 0, max: 1.8, grid, title: { display: true, text: 'Absorbance' }, ticks: { stepSize: 0.3 } }
+        }
+      },
+      plugins: [{ id: 'note', afterDatasetsDraw(ch) {
+        const { ctx, scales: { x, y } } = ch;
+        text(ctx, 'violet', x.getPixelForValue(450), y.getPixelForValue(1.72), 'left', 500);
+        text(ctx, 'red', x.getPixelForValue(650), y.getPixelForValue(1.72), 'right', 500);
+      }}]
+    });
+  };
+
+  builders.ncqd = () => {
+    const n = DATA.ncqd, labels = ['Repeat 1', 'Repeat 2', 'Repeat 3', 'Mean'];
+    const b = [...n.before, nB], a = [...n.after, nA];
+    return new Chart(document.getElementById('c-ncqd'), {
+      type: 'bar',
+      data: { labels, datasets: [
+        { label: 'Before UV', data: b, backgroundColor: css('--ctrl'), ...bar },
+        { label: 'After 30 min UV', data: a, backgroundColor: css('--ncqd'), ...bar }
+      ]},
+      options: {
+        datasets: { bar: { categoryPercentage: .7, barPercentage: .9 } },
+        plugins: { legend, tooltip: { ...tip, callbacks: { label: c => `${c.dataset.label}: ${c.parsed.y.toFixed(3)}` } } },
+        scales: { y: { beginAtZero: true, max: 1, grid, title: { display: true, text: 'Absorbance at 650 nm' }, ticks: { stepSize: 0.2 } }, x: { grid: { display: false } } }
+      },
+      plugins: [{ id: 'lbl', afterDatasetsDraw(ch) {
+        [b, a].forEach((d, k) => ch.getDatasetMeta(k).data.forEach((r, i) => text(ch.ctx, d[i].toFixed(2), r.x, r.y - 6)));
+      }}]
+    });
+  };
+
+  builders.detector = () => {
+    const curve = Array.from({ length: 65 }, (_, i) => ({ x: i * 0.05, y: 100 * 10 ** (-i * 0.05) }));
+    const pt = (name, a) => ({ x: a, y: 100 * 10 ** -a, name });
+    const mk = c => ({ backgroundColor: c, borderColor: '#fff', borderWidth: 2, pointRadius: 5.5, pointHoverRadius: 8 });
+    return new Chart(document.getElementById('c-detector'), {
+      type: 'scatter',
+      data: { datasets: [
+        { label: 'T = 10^−A', data: curve, showLine: true, pointRadius: 0, borderColor: css('--ink-3'), borderWidth: 2, order: 3 },
+        { label: '450 nm channel (violet)', data: DATA.channels.map(([n, a450]) => pt(n, a450)), ...mk(css('--violet')) },
+        { label: '650 nm channel (red)', data: DATA.channels.filter(c => c[2] != null).map(([n, , a650]) => pt(n, a650)), ...mk(css('--day2')) }
+      ]},
+      options: {
+        plugins: {
+          legend: { ...legend, labels: { ...legend.labels, filter: l => l.datasetIndex > 0 } },
+          tooltip: { ...tip, filter: i => i.datasetIndex > 0, callbacks: {
+            label: c => `${c.raw.name} (${c.dataset.label.split(' ')[0]} nm): A = ${c.parsed.x.toFixed(2)} → ${c.parsed.y < 1 ? c.parsed.y.toFixed(2) : c.parsed.y.toFixed(0)}% of light`
+          }}
+        },
+        scales: {
+          x: { min: 0, max: 3.2, grid, title: { display: true, text: 'Absorbance (A)' }, ticks: { stepSize: 0.5 } },
+          y: { min: 0, max: 100, grid, title: { display: true, text: '% of light reaching detector' }, ticks: { callback: v => v + '%' } }
+        }
+      },
+      plugins: [{ id: 'zone', beforeDatasetsDraw(ch) {
+        const { ctx, chartArea: a, scales: { x } } = ch, x0 = x.getPixelForValue(2);
+        ctx.save(); ctx.fillStyle = 'rgba(217,115,31,.10)'; ctx.fillRect(x0, a.top, a.right - x0, a.bottom - a.top);
+        ctx.strokeStyle = 'rgba(217,115,31,.6)'; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(x0, a.top); ctx.lineTo(x0, a.bottom); ctx.stroke(); ctx.restore();
+        text(ctx, 'Below 1% light:', x0 + 8, a.top + 20, 'left', 700);
+        text(ctx, 'unreliable zone', x0 + 8, a.top + 37, 'left');
+      }}]
+    });
+  };
+
+  builders.fig3 = () => {
+    const E = DATA.ncqdAmount, pts = c => ({ borderColor: c, backgroundColor: c, borderWidth: 2, pointRadius: 5, pointHoverRadius: 7, pointBorderColor: '#fff', pointBorderWidth: 2 });
+    return new Chart(document.getElementById('c-fig3'), {
+      type: 'line',
+      data: { labels: E.map(e => e.vol + ' mL'), datasets: [
+        { label: 'Before UV', data: E.map(e => e.a450), ...pts(css('--ctrl')) },
+        { label: 'After 30 min UV', data: E.map(e => e.after450), ...pts(css('--ncqd')) }
+      ]},
+      options: {
+        interaction: { mode: 'index', intersect: false },
+        layout: { padding: { right: 70 } },
+        plugins: { legend, tooltip: { ...tip, callbacks: {
+          title: it => `${it[0].label} N-CQD`,
+          label: c => `${c.dataset.label}: ${c.parsed.y.toFixed(2)}`,
+          footer: it => it.length === 2 ? `Change after UV: ${(it[1].parsed.y - it[0].parsed.y).toFixed(2)}` : ''
+        }}},
+        scales: { y: { min: 2.0, max: 3.1, grid, title: { display: true, text: 'Absorbance at 450 nm' }, ticks: { stepSize: 0.2 } }, x: { grid: { display: false }, title: { display: true, text: 'N-CQD solution added' } } }
+      },
+      plugins: [{ id: 'end', afterDatasetsDraw(ch) {
+        ch.data.datasets.forEach((ds, i) => { const pt = ch.getDatasetMeta(i).data.at(-1); text(ch.ctx, i ? 'After UV' : 'Before UV', pt.x + 10, pt.y + (i ? 14 : -4), 'left', 700); });
+      }}]
+    });
+  };
+
+  builders.fig2 = () => {
+    const T = DATA.trials;
+    return new Chart(document.getElementById('c-fig2'), {
+      type: 'bar',
+      data: { labels: T.map(t => t.label), datasets: [{ data: T.map(t => t.mean), backgroundColor: T.map(t => t.ctrl ? css('--ctrl') : css('--cqd')), ...bar }] },
+      options: {
+        plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
+          label: c => `Mean absorbance ${c.parsed.y.toFixed(3)}`,
+          afterLabel: c => { const r = T[c.dataIndex].reps; return r.length > 1 ? `Beakers: ${r.map(v => v.toFixed(3)).join(', ')}` : '1 beaker'; }
+        }}},
+        scales: { y: { beginAtZero: true, max: 0.45, grid, title: { display: true, text: 'Absorbance at 650 nm' }, ticks: { stepSize: 0.1 } }, x: { grid: { display: false } } }
+      },
+      plugins: [{ id: 'dots', afterDatasetsDraw(ch) {
+        const { ctx, scales: { y } } = ch;
+        ch.getDatasetMeta(0).data.forEach((b, i) => {
+          const r = T[i].reps; let top = b.y;
+          if (r.length > 1) r.forEach((v, j) => { const py = y.getPixelForValue(v); dot(ctx, b.x + (j - 1) * 11, py, css('--ink')); top = Math.min(top, py - 4); });
+          text(ctx, T[i].mean.toFixed(3), b.x, top - 8);
+        });
+      }}]
+    });
+  };
+}
+
+/* ===== tabs ===== */
+const tabs = [...document.querySelectorAll('.tabs button')];
+function showTab(id) {
+  tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+  document.querySelectorAll('.panel').forEach(p => p.hidden = p.dataset.panel !== id);
+  if (builders[id] && !made[id]) made[id] = builders[id]();
+}
+tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+document.querySelectorAll('a[data-tab]').forEach(a => a.addEventListener('click', () => showTab(a.dataset.tab)));
+showTab('removed');
+</script>
+</body>
+</html>

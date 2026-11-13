@@ -1,0 +1,217 @@
+﻿Session,Date (colorimeter clock),Run,Sample,Trial,Stage,Time (s),A 450 nm (violet),A 500 nm (blue),A 550 nm (green),A 570 nm (yellow),A 600 nm (orange),A 650 nm (red)
+Lessons 4-5,2026-10-13,1,MB standard 60 ppm,Calibration,Reference,0,0.061,0.167,0.539,0.802,1.254,1.264
+Lessons 4-5,2026-10-13,1,MB standard 60 ppm,Calibration,Reference,1,0.06,0.166,0.539,0.802,1.255,1.262
+Lessons 4-5,2026-10-13,1,MB standard 60 ppm,Calibration,Reference,2,0.059,0.166,0.539,0.801,1.254,1.262
+Lessons 4-5,2026-10-13,1,MB standard 60 ppm,Calibration,Reference,3,0.059,0.166,0.539,0.801,1.253,1.262
+Lessons 4-5,2026-10-13,1,MB standard 60 ppm,Calibration,Reference,4,0.059,0.166,0.539,0.801,1.253,1.262
+Lessons 4-5,2026-10-13,1,MB standard 60 ppm,Calibration,Reference,5,0.059,0.166,0.539,0.802,1.253,1.262
+Lessons 4-5,2026-10-13,1,MB standard 60 ppm,Calibration,Reference,6,0.06,0.167,0.539,0.802,1.253,1.262
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,0,0.054,0.131,0.413,0.621,1.003,1.109
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,1,0.054,0.131,0.413,0.621,1.003,1.109
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,2,0.053,0.131,0.413,0.62,1.002,1.108
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,3,0.055,0.132,0.413,0.621,1.003,1.109
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,4,0.054,0.132,0.413,0.62,1.002,1.109
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,5,0.054,0.131,0.412,0.62,1.002,1.108
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,6,0.055,0.131,0.412,0.62,1.002,1.108
+Lessons 4-5,2026-10-13,2,MB standard 40 ppm,Calibration,Reference,7,0.053,0.131,0.412,0.619,1.001,1.108
+Lessons 4-5,2026-10-13,3,"MB + 3% H2O2, no CQD (control 2)",A: H2O2 only (control),After 30 min UV,0,0,0.003,0.062,0.085,0.158,0.18
+Lessons 4-5,2026-10-13,3,"MB + 3% H2O2, no CQD (control 2)",A: H2O2 only (control),After 30 min UV,1,0,0.003,0.061,0.085,0.158,0.18
+Lessons 4-5,2026-10-13,3,"MB + 3% H2O2, no CQD (control 2)",A: H2O2 only (control),After 30 min UV,2,0,0.003,0.061,0.085,0.158,0.18
+Lessons 4-5,2026-10-13,3,"MB + 3% H2O2, no CQD (control 2)",A: H2O2 only (control),After 30 min UV,3,0,0.003,0.061,0.085,0.158,0.18
+Lessons 4-5,2026-10-13,3,"MB + 3% H2O2, no CQD (control 2)",A: H2O2 only (control),After 30 min UV,4,0,0.003,0.061,0.085,0.158,0.18
+Lessons 4-5,2026-10-13,3,"MB + 3% H2O2, no CQD (control 2)",A: H2O2 only (control),After 30 min UV,5,0,0.003,0.062,0.085,0.158,0.18
+Lessons 4-5,2026-10-13,4,Repeat reading of control 1 (same cuvette),Duplicate,After 30 min UV,0,0,0.015,0.065,0.093,0.155,0.204
+Lessons 4-5,2026-10-13,4,Repeat reading of control 1 (same cuvette),Duplicate,After 30 min UV,1,0,0.013,0.063,0.091,0.154,0.203
+Lessons 4-5,2026-10-13,4,Repeat reading of control 1 (same cuvette),Duplicate,After 30 min UV,2,0,0.013,0.062,0.091,0.154,0.202
+Lessons 4-5,2026-10-13,4,Repeat reading of control 1 (same cuvette),Duplicate,After 30 min UV,3,0,0.012,0.062,0.091,0.153,0.202
+Lessons 4-5,2026-10-13,4,Repeat reading of control 1 (same cuvette),Duplicate,After 30 min UV,4,0,0.012,0.062,0.091,0.153,0.203
+Lessons 4-5,2026-10-13,5,"MB + 3% H2O2, no CQD (control 1)",A: H2O2 only (control),After 30 min UV,0,0,0.012,0.062,0.091,0.154,0.203
+Lessons 4-5,2026-10-13,5,"MB + 3% H2O2, no CQD (control 1)",A: H2O2 only (control),After 30 min UV,1,0,0.012,0.062,0.091,0.154,0.202
+Lessons 4-5,2026-10-13,5,"MB + 3% H2O2, no CQD (control 1)",A: H2O2 only (control),After 30 min UV,2,0,0.012,0.062,0.091,0.154,0.202
+Lessons 4-5,2026-10-13,5,"MB + 3% H2O2, no CQD (control 1)",A: H2O2 only (control),After 30 min UV,3,0,0.012,0.062,0.091,0.154,0.202
+Lessons 4-5,2026-10-13,5,"MB + 3% H2O2, no CQD (control 1)",A: H2O2 only (control),After 30 min UV,4,0,0.013,0.062,0.091,0.154,0.202
+Lessons 4-5,2026-10-13,5,"MB + 3% H2O2, no CQD (control 1)",A: H2O2 only (control),After 30 min UV,5,0,0.012,0.062,0.091,0.154,0.202
+Lessons 4-5,2026-10-13,6,"MB + 3% H2O2, no CQD (control 3)",A: H2O2 only (control),After 30 min UV,0,0.012,0.012,0.044,0.069,0.114,0.144
+Lessons 4-5,2026-10-13,6,"MB + 3% H2O2, no CQD (control 3)",A: H2O2 only (control),After 30 min UV,1,0.012,0.012,0.044,0.069,0.114,0.144
+Lessons 4-5,2026-10-13,6,"MB + 3% H2O2, no CQD (control 3)",A: H2O2 only (control),After 30 min UV,2,0.012,0.012,0.044,0.069,0.113,0.144
+Lessons 4-5,2026-10-13,6,"MB + 3% H2O2, no CQD (control 3)",A: H2O2 only (control),After 30 min UV,3,0.012,0.012,0.044,0.069,0.114,0.144
+Lessons 4-5,2026-10-13,6,"MB + 3% H2O2, no CQD (control 3)",A: H2O2 only (control),After 30 min UV,4,0.012,0.012,0.044,0.07,0.114,0.144
+Lessons 4-5,2026-10-13,6,"MB + 3% H2O2, no CQD (control 3)",A: H2O2 only (control),After 30 min UV,5,0.012,0.012,0.044,0.07,0.114,0.144
+Lessons 4-5,2026-10-13,7,MB + 3% H2O2 + 1 mL CQD,B: Plain CQD amount,After 30 min UV,0,0.018,0.025,0.097,0.126,0.22,0.309
+Lessons 4-5,2026-10-13,7,MB + 3% H2O2 + 1 mL CQD,B: Plain CQD amount,After 30 min UV,1,0.018,0.026,0.097,0.126,0.22,0.308
+Lessons 4-5,2026-10-13,7,MB + 3% H2O2 + 1 mL CQD,B: Plain CQD amount,After 30 min UV,2,0.017,0.025,0.097,0.126,0.219,0.308
+Lessons 4-5,2026-10-13,7,MB + 3% H2O2 + 1 mL CQD,B: Plain CQD amount,After 30 min UV,3,0.018,0.025,0.097,0.126,0.22,0.309
+Lessons 4-5,2026-10-13,7,MB + 3% H2O2 + 1 mL CQD,B: Plain CQD amount,After 30 min UV,4,0.017,0.025,0.097,0.126,0.22,0.308
+Lessons 4-5,2026-10-13,7,MB + 3% H2O2 + 1 mL CQD,B: Plain CQD amount,After 30 min UV,5,0.018,0.025,0.097,0.126,0.219,0.308
+Lessons 4-5,2026-10-13,7,MB + 3% H2O2 + 1 mL CQD,B: Plain CQD amount,After 30 min UV,6,0.018,0.025,0.097,0.125,0.219,0.308
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,0,0.019,0.038,0.086,0.112,0.217,0.307
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,1,0.029,0.044,0.091,0.118,0.222,0.312
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,2,0.019,0.04,0.084,0.112,0.219,0.309
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,3,0.018,0.038,0.083,0.111,0.214,0.305
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,4,0.019,0.038,0.083,0.111,0.214,0.306
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,5,0.02,0.038,0.083,0.111,0.215,0.306
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,6,0.021,0.039,0.083,0.111,0.215,0.307
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,7,0.021,0.039,0.083,0.111,0.215,0.307
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,8,0.021,0.038,0.084,0.111,0.215,0.307
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,9,0.02,0.038,0.084,0.112,0.215,0.307
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,10,0.02,0.038,0.084,0.111,0.215,0.306
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,11,0.02,0.039,0.085,0.112,0.215,0.306
+Lessons 4-5,2026-10-13,8,MB + 3% H2O2 + 2 mL CQD,B: Plain CQD amount,After 30 min UV,12,0.02,0.039,0.085,0.112,0.216,0.307
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,0,0.017,0.033,0.071,0.108,0.181,0.293
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,1,0.016,0.034,0.071,0.109,0.181,0.293
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,2,0.017,0.034,0.071,0.109,0.181,0.293
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,3,0.016,0.034,0.071,0.109,0.18,0.294
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,4,0.017,0.034,0.071,0.109,0.181,0.294
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,5,0.017,0.034,0.071,0.109,0.181,0.294
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,6,0.016,0.035,0.071,0.109,0.181,0.294
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,7,0.016,0.034,0.071,0.109,0.181,0.294
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,8,0.016,0.034,0.071,0.109,0.181,0.294
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,9,0.017,0.034,0.071,0.109,0.181,0.293
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,10,0.017,0.034,0.071,0.109,0.181,0.294
+Lessons 4-5,2026-10-13,9,MB + 3% H2O2 + 3 mL CQD,B: Plain CQD amount,After 30 min UV,11,0.016,0.034,0.071,0.109,0.181,0.294
+Lessons 4-5,2026-10-13,10,MB stock 10 ppm (starting solution),Calibration,Reference,0,0,0.03,0.09,0.145,0.25,0.362
+Lessons 4-5,2026-10-13,10,MB stock 10 ppm (starting solution),Calibration,Reference,1,0,0.029,0.09,0.145,0.25,0.362
+Lessons 4-5,2026-10-13,10,MB stock 10 ppm (starting solution),Calibration,Reference,2,0,0.029,0.09,0.145,0.25,0.362
+Lessons 4-5,2026-10-13,10,MB stock 10 ppm (starting solution),Calibration,Reference,3,0,0.029,0.09,0.145,0.25,0.362
+Lessons 4-5,2026-10-13,10,MB stock 10 ppm (starting solution),Calibration,Reference,4,0,0.029,0.089,0.145,0.249,0.362
+Lessons 4-5,2026-10-13,10,MB stock 10 ppm (starting solution),Calibration,Reference,5,0,0.029,0.09,0.145,0.249,0.362
+Lessons 4-5,2026-10-13,11,Unlabelled run,Unknown,Unknown,0,0.413,0.164,0.082,0.064,0.046,0.047
+Lessons 4-5,2026-10-13,11,Unlabelled run,Unknown,Unknown,1,0.412,0.165,0.085,0.065,0.049,0.048
+Lessons 4-5,2026-10-13,11,Unlabelled run,Unknown,Unknown,2,0.416,0.163,0.082,0.063,0.048,0.048
+Lessons 4-5,2026-10-13,11,Unlabelled run,Unknown,Unknown,3,0.415,0.165,0.082,0.064,0.048,0.049
+Lessons 4-5,2026-10-13,11,Unlabelled run,Unknown,Unknown,4,0.42,0.166,0.082,0.064,0.049,0.052
+Lessons 4-5,2026-10-13,11,Unlabelled run,Unknown,Unknown,5,0.416,0.166,0.083,0.064,0.048,0.049
+Lessons 4-5,2026-10-13,11,Unlabelled run,Unknown,Unknown,6,0.415,0.167,0.083,0.065,0.051,0.051
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,0,0,0.009,0.012,0.013,0.011,0.021
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,1,0.004,0.006,0.014,0.012,0.012,0.022
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,2,0.002,0.008,0.017,0.015,0.015,0.024
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,3,0,0.005,0.013,0.011,0.012,0.022
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,4,0,0.003,0.011,0.011,0.009,0.022
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,5,0,0.005,0.013,0.011,0.013,0.023
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,6,0.004,0.005,0.018,0.016,0.019,0.026
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,7,0,0.002,0.008,0.007,0.007,0.019
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,8,0.0009623,0.006,0.013,0.012,0.014,0.022
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,9,0.008,0.004,0.015,0.014,0.016,0.022
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,10,0,0.0006051,0.009,0.008,0.011,0.02
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,11,0.004,0.008,0.018,0.016,0.018,0.027
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,12,0.008,0.004,0.016,0.013,0.015,0.022
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,13,0,0.003,0.011,0.009,0.012,0.022
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,14,0.006,0.011,0.015,0.015,0.011,0.021
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,15,0,0.0009281,0.008,0.007,0.007,0.016
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,16,0.011,0.007,0.022,0.019,0.019,0.024
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,17,0.004,0.006,0.014,0.014,0.013,0.029
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,18,0,0.009,0.016,0.012,0.01,0.019
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,19,0,0.006,0.017,0.014,0.017,0.025
+Lessons 4-5,2026-10-13,12,6% H2O2 only,Check,Reference,20,0,0.002,0.01,0.009,0.009,0.02
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,0,0.037,0.044,0.091,0.134,0.224,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,1,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,2,0.037,0.044,0.091,0.134,0.223,0.354
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,3,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,4,0.037,0.044,0.091,0.134,0.224,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,5,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,6,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,7,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,8,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,9,0.037,0.044,0.091,0.135,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,10,0.038,0.044,0.091,0.135,0.224,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,11,0.037,0.044,0.092,0.135,0.224,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,12,0.038,0.044,0.091,0.134,0.224,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,13,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,14,0.037,0.044,0.091,0.134,0.223,0.354
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,15,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,16,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,17,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,18,0.037,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,19,0.036,0.044,0.091,0.134,0.223,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,20,0.037,0.044,0.091,0.134,0.223,0.354
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,21,0.037,0.044,0.092,0.135,0.224,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,22,0.037,0.044,0.092,0.135,0.224,0.355
+Lessons 4-5,2026-10-13,13,MB + 6% H2O2 + 1 mL CQD (rep 1),C: 6% H2O2 + CQD,After 30 min UV,23,0.037,0.044,0.092,0.135,0.224,0.355
+Lessons 4-5,2026-10-13,14,Discarded reading,Discarded,Discarded,0,0.206,0.298,0.288,0.311,0.412,0.615
+Lessons 4-5,2026-10-13,14,Discarded reading,Discarded,Discarded,1,0.205,0.298,0.288,0.311,0.412,0.615
+Lessons 4-5,2026-10-13,14,Discarded reading,Discarded,Discarded,2,0.205,0.298,0.288,0.311,0.412,0.615
+Lessons 4-5,2026-10-13,14,Discarded reading,Discarded,Discarded,3,0.206,0.298,0.288,0.311,0.413,0.615
+Lessons 4-5,2026-10-13,14,Discarded reading,Discarded,Discarded,4,0.206,0.298,0.289,0.311,0.413,0.615
+Lessons 4-5,2026-10-13,14,Discarded reading,Discarded,Discarded,5,0.205,0.298,0.289,0.311,0.413,0.615
+Lessons 4-5,2026-10-13,14,Discarded reading,Discarded,Discarded,6,0.204,0.299,0.287,0.31,0.412,0.616
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,0,0.014,0.032,0.094,0.131,0.229,0.355
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,1,0.014,0.032,0.094,0.13,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,2,0.013,0.032,0.094,0.13,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,3,0.013,0.032,0.094,0.131,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,4,0.013,0.032,0.094,0.131,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,5,0.013,0.032,0.095,0.131,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,6,0.013,0.032,0.095,0.131,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,7,0.013,0.032,0.095,0.131,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,8,0.014,0.032,0.095,0.131,0.229,0.355
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,9,0.013,0.032,0.094,0.131,0.229,0.354
+Lessons 4-5,2026-10-13,15,MB + 6% H2O2 + 1 mL CQD (rep 2),C: 6% H2O2 + CQD,After 30 min UV,10,0.013,0.032,0.094,0.13,0.229,0.354
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,0,0.021,0.037,0.097,0.145,0.249,0.372
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,1,0.021,0.037,0.097,0.145,0.249,0.372
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,2,0.021,0.037,0.097,0.145,0.249,0.372
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,3,0.021,0.037,0.097,0.145,0.249,0.372
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,4,0.021,0.037,0.097,0.145,0.249,0.372
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,5,0.021,0.037,0.097,0.145,0.249,0.371
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,6,0.021,0.037,0.097,0.145,0.249,0.372
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,7,0.021,0.037,0.097,0.145,0.248,0.371
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,8,0.02,0.037,0.097,0.145,0.248,0.371
+Lessons 4-5,2026-10-13,16,MB + 6% H2O2 + 1 mL CQD (rep 3),C: 6% H2O2 + CQD,After 30 min UV,9,0.022,0.037,0.097,0.146,0.249,0.372
+Lesson 6,2026-10-14,1,MB + 3% H2O2 + 1 mL N-CQD (rep 1),D: N-CQD,Before UV,0,1.617,0.395,0.34,0.407,0.585,0.735
+Lesson 6,2026-10-14,1,MB + 3% H2O2 + 1 mL N-CQD (rep 1),D: N-CQD,Before UV,1,1.617,0.395,0.34,0.407,0.585,0.736
+Lesson 6,2026-10-14,2,MB + 3% H2O2 + 1 mL N-CQD (rep 2),D: N-CQD,Before UV,0,1.622,0.402,0.344,0.414,0.592,0.741
+Lesson 6,2026-10-14,2,MB + 3% H2O2 + 1 mL N-CQD (rep 2),D: N-CQD,Before UV,1,1.625,0.401,0.344,0.414,0.592,0.743
+Lesson 6,2026-10-14,2,MB + 3% H2O2 + 1 mL N-CQD (rep 2),D: N-CQD,Before UV,2,1.628,0.401,0.344,0.414,0.592,0.743
+Lesson 6,2026-10-14,2,MB + 3% H2O2 + 1 mL N-CQD (rep 2),D: N-CQD,Before UV,3,1.631,0.4,0.345,0.413,0.593,0.743
+Lesson 6,2026-10-14,3,MB + 3% H2O2 + 1 mL N-CQD (rep 3),D: N-CQD,Before UV,0,1.622,0.399,0.344,0.412,0.592,0.74
+Lesson 6,2026-10-14,3,MB + 3% H2O2 + 1 mL N-CQD (rep 3),D: N-CQD,Before UV,1,1.621,0.399,0.345,0.412,0.592,0.74
+Lesson 6,2026-10-14,3,MB + 3% H2O2 + 1 mL N-CQD (rep 3),D: N-CQD,Before UV,2,1.622,0.399,0.344,0.412,0.592,0.74
+Lesson 6,2026-10-14,3,MB + 3% H2O2 + 1 mL N-CQD (rep 3),D: N-CQD,Before UV,3,1.621,0.399,0.344,0.412,0.592,0.74
+Lesson 6,2026-10-14,3,MB + 3% H2O2 + 1 mL N-CQD (rep 3),D: N-CQD,Before UV,4,1.622,0.399,0.344,0.412,0.592,0.74
+Lesson 6,2026-10-14,3,MB + 3% H2O2 + 1 mL N-CQD (rep 3),D: N-CQD,Before UV,5,1.621,0.399,0.345,0.412,0.592,0.74
+Lesson 6,2026-10-14,4,MB + 3% H2O2 + 1 mL N-CQD (N doped 1),D: N-CQD,After 30 min UV,0,2.024,0.643,0.571,0.534,0.763,0.836
+Lesson 6,2026-10-14,4,MB + 3% H2O2 + 1 mL N-CQD (N doped 1),D: N-CQD,After 30 min UV,1,2.024,0.643,0.571,0.534,0.763,0.835
+Lesson 6,2026-10-14,4,MB + 3% H2O2 + 1 mL N-CQD (N doped 1),D: N-CQD,After 30 min UV,2,2.023,0.643,0.571,0.533,0.763,0.835
+Lesson 6,2026-10-14,4,MB + 3% H2O2 + 1 mL N-CQD (N doped 1),D: N-CQD,After 30 min UV,3,2.023,0.643,0.571,0.534,0.764,0.836
+Lesson 6,2026-10-14,4,MB + 3% H2O2 + 1 mL N-CQD (N doped 1),D: N-CQD,After 30 min UV,4,2.024,0.643,0.572,0.534,0.765,0.836
+Lesson 6,2026-10-14,4,MB + 3% H2O2 + 1 mL N-CQD (N doped 1),D: N-CQD,After 30 min UV,5,2.024,0.644,0.572,0.535,0.765,0.837
+Lesson 6,2026-10-14,4,MB + 3% H2O2 + 1 mL N-CQD (N doped 1),D: N-CQD,After 30 min UV,6,2.024,0.642,0.571,0.533,0.764,0.835
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,0,1.824,0.482,0.375,0.438,0.596,0.717
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,1,1.823,0.482,0.375,0.438,0.595,0.717
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,2,1.823,0.482,0.375,0.438,0.596,0.718
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,3,1.824,0.482,0.375,0.438,0.596,0.719
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,4,1.824,0.482,0.375,0.438,0.596,0.719
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,5,1.823,0.482,0.374,0.438,0.596,0.718
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,6,1.822,0.482,0.375,0.438,0.595,0.717
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,7,1.823,0.482,0.375,0.438,0.595,0.717
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,8,1.824,0.483,0.375,0.438,0.596,0.718
+Lesson 6,2026-10-14,5,MB + 3% H2O2 + 1 mL N-CQD (N doped 2),D: N-CQD,After 30 min UV,9,1.824,0.483,0.375,0.439,0.596,0.718
+Lesson 6,2026-10-14,6,MB + 3% H2O2 + 1 mL N-CQD (N doped 3),D: N-CQD,After 30 min UV,0,2.034,0.545,0.396,0.461,0.598,0.731
+Lesson 6,2026-10-14,6,MB + 3% H2O2 + 1 mL N-CQD (N doped 3),D: N-CQD,After 30 min UV,1,2.034,0.544,0.396,0.46,0.597,0.729
+Lesson 6,2026-10-14,6,MB + 3% H2O2 + 1 mL N-CQD (N doped 3),D: N-CQD,After 30 min UV,2,2.033,0.544,0.396,0.46,0.598,0.729
+Lesson 6,2026-10-14,6,MB + 3% H2O2 + 1 mL N-CQD (N doped 3),D: N-CQD,After 30 min UV,3,2.034,0.544,0.397,0.46,0.598,0.729
+Lesson 6,2026-10-14,6,MB + 3% H2O2 + 1 mL N-CQD (N doped 3),D: N-CQD,After 30 min UV,4,2.034,0.544,0.397,0.461,0.598,0.729
+Lesson 6,2026-10-14,6,MB + 3% H2O2 + 1 mL N-CQD (N doped 3),D: N-CQD,After 30 min UV,5,2.034,0.544,0.397,0.461,0.598,0.729
+Lesson 6,2026-10-14,7,Unlabelled run,Unknown,Reference,0,1.593,0.399,0.32,0.394,0.554,0.694
+Lesson 6,2026-10-14,7,Unlabelled run,Unknown,Reference,1,1.593,0.399,0.32,0.394,0.554,0.694
+Lesson 6,2026-10-14,7,Unlabelled run,Unknown,Reference,2,1.592,0.399,0.32,0.394,0.554,0.694
+Lesson 6,2026-10-14,7,Unlabelled run,Unknown,Reference,3,1.593,0.4,0.321,0.395,0.555,0.694
+Lesson 6,2026-10-14,7,Unlabelled run,Unknown,Reference,4,1.593,0.4,0.321,0.395,0.555,0.694
+Lesson 6,2026-10-14,7,Unlabelled run,Unknown,Reference,5,1.592,0.4,0.321,0.395,0.554,0.694
+Lesson 6,2026-10-14,7,Unlabelled run,Unknown,Reference,6,1.592,0.399,0.32,0.394,0.554,0.694
+Lesson 7,2026-10-15,1,MB + 1 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,0,2.258,0.667,0.487,0.531,0.679,0.812
+Lesson 7,2026-10-15,1,MB + 1 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,1,2.258,0.666,0.485,0.529,0.678,0.811
+Lesson 7,2026-10-15,1,MB + 1 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,2,2.258,0.665,0.484,0.529,0.677,0.81
+Lesson 7,2026-10-15,1,MB + 1 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,3,2.255,0.666,0.484,0.529,0.677,0.81
+Lesson 7,2026-10-15,1,MB + 1 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,4,2.255,0.667,0.484,0.529,0.676,0.81
+Lesson 7,2026-10-15,1,MB + 1 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,5,2.255,0.667,0.485,0.529,0.677,0.811
+Lesson 7,2026-10-15,2,MB + 2 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,0,2.772,1.211,0.878,0.778,0.964,1.093
+Lesson 7,2026-10-15,2,MB + 2 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,1,2.772,1.211,0.878,0.78,0.963,1.094
+Lesson 7,2026-10-15,2,MB + 2 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,2,2.772,1.211,0.88,0.779,0.964,1.094
+Lesson 7,2026-10-15,2,MB + 2 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,3,2.772,1.213,0.88,0.78,0.965,1.094
+Lesson 7,2026-10-15,2,MB + 2 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,4,2.772,1.211,0.88,0.779,0.964,1.093
+Lesson 7,2026-10-15,2,MB + 2 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,5,2.772,1.213,0.88,0.78,0.963,1.094
+Lesson 7,2026-10-15,3,MB + 3 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,0,2.952,1.398,0.941,0.934,1.022,1.165
+Lesson 7,2026-10-15,3,MB + 3 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,1,2.952,1.399,0.937,0.933,1.018,1.167
+Lesson 7,2026-10-15,3,MB + 3 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,2,2.952,1.398,0.939,0.933,1.02,1.165
+Lesson 7,2026-10-15,3,MB + 3 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,3,2.952,1.397,0.939,0.932,1.019,1.165
+Lesson 7,2026-10-15,3,MB + 3 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,4,2.952,1.397,0.939,0.933,1.019,1.165
+Lesson 7,2026-10-15,3,MB + 3 mL N-CQD,E: N-CQD amount,Before H2O2 + UV,5,2.952,1.397,0.939,0.933,1.019,1.164
