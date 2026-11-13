@@ -130,16 +130,16 @@
   @media (max-width: 620px) { .tl-step { grid-template-columns: 1fr; } .tl-step:nth-child(even) .tl-media { order: 0; } }
 
   /* ---------- 3 3D model ---------- */
-  .stage {
-    position: relative; min-height: 380px; border-radius: var(--radius); overflow: hidden;
-    background: radial-gradient(circle at 50% 40%, #2c4a86, #101b33 75%); color: #dbe6fb;
-    display: grid; place-items: center; text-align: center; padding: 24px;
-  }
-  .stage svg.spin { width: 180px; height: 180px; animation: spin 18s linear infinite; filter: drop-shadow(0 0 18px rgba(120,255,170,.45)); }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce) { .stage svg.spin { animation: none; } }
-  .stage p { margin: 14px auto 0; max-width: 460px; font-size: 15px; }
-  .stage .tag { display: inline-block; margin-top: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.12); font-size: 13px; }
+  .stage3d { position: relative; height: 440px; border-radius: var(--radius); overflow: hidden;
+    background: radial-gradient(circle at 50% 40%, #2c4a86, #101b33 75%); }
+  .stage3d model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: transparent; }
+  .mv-hint { display: grid; place-items: center; height: 100%; color: #dbe6fb; font-size: 15px; }
+  .mv-help { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); padding: 4px 12px; border-radius: 999px;
+    background: rgba(255,255,255,.14); color: #e6eefc; font-size: 13px; white-space: nowrap; pointer-events: none; }
+  @media (max-width: 620px) { .stage3d { height: 320px; } }
+  .vids { margin-top: 16px; }
+  .vids figure { margin: 0; }
+  .vids video { width: 100%; aspect-ratio: 16/9; display: block; border-radius: 10px; background: #0b1426; }
 
   /* ---------- 4 data explorer ---------- */
   .tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-bottom: 14px; }
@@ -313,18 +313,28 @@
   <!-- 3 3D MODEL -->
   <section id="model">
     <div class="sh"><span class="hex">3</span><h2>See it in 3D</h2></div>
-    <p class="lede">Drag to rotate, pinch or scroll to zoom.</p>
-    <div class="stage">
-      <div>
-        <svg class="spin" viewBox="0 0 200 200" aria-hidden="true">
-          <g fill="none" stroke="#7dffb0" stroke-width="3" stroke-linejoin="round" opacity=".9">
-            <path d="M100 40 126 55v30l-26 15-26-15V55z"/><path d="M126 85l26 15v30l-26 15-26-15v-30z"/><path d="M74 85l26 15v30l-26 15-26-15v-30z"/>
-            <path d="M100 130l26 15v30l-26 15-26-15v-30z" opacity=".55"/><path d="M152 40l26 15v30l-26 15-26-15V55z" opacity=".55"/><path d="M48 40l26 15v30L48 100 22 85V55z" opacity=".55"/>
-          </g>
-        </svg>
-        <p><b>3D model / animation coming soon.</b><br>Placeholder: send a .glb file (3D model) or .mp4 (animation) and it goes here.</p>
-        <span class="tag">Preview only</span>
-      </div>
+    <p class="lede">An interactive model of a carbon quantum dot, an animation of its layers, and a one-minute video on how CQDs break down dye.</p>
+    <div class="stage3d">
+      <model-viewer src="media/cqd-model.glb" alt="3D model of a carbon quantum dot" camera-controls touch-action="pan-y"
+        auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" shadow-intensity="0" exposure="1.1"
+        environment-image="neutral" interaction-prompt="none" loading="lazy">
+        <div class="mv-hint" slot="poster">Loading 3D model...</div>
+      </model-viewer>
+      <span class="mv-help">Drag to rotate · pinch or scroll to zoom</span>
+    </div>
+    <div class="grid-2 vids">
+      <figure class="card">
+        <h3>Inside a CQD</h3>
+        <video src="media/cqd-layers.mp4" poster="media/cqd-layers-poster.jpg" muted loop playsinline preload="none" controls data-autoplay
+          aria-label="Animation: the outer surface of a carbon quantum dot breaks away to show the honeycomb carbon core"></video>
+        <figcaption>15-second animation. The oxygen-rich surface peels away to show the honeycomb carbon core underneath.</figcaption>
+      </figure>
+      <figure class="card">
+        <h3>How CQDs clean dye-polluted water</h3>
+        <video src="media/cqd-explainer.mp4" poster="media/cqd-explainer-poster.jpg" playsinline preload="none" controls
+          aria-label="Explainer video: how UV light, hydrogen peroxide and carbon quantum dots break down methylene blue"></video>
+        <figcaption>1-minute explainer, no sound. UV light excites the CQD, the freed electron splits H<sub>2</sub>O<sub>2</sub> into hydroxyl radicals, and the radicals break the dye apart.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -486,6 +496,7 @@
 
 <dialog id="lightbox"><img alt=""></dialog>
 
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 <script>
 /* ===== DATA: from "EEI Data - Organised.xlsx" (SPARKvue colorimeter exports, 13–15 Oct 2026) ===== */
@@ -753,6 +764,20 @@ function showTab(id) {
 tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 document.querySelectorAll('a[data-tab]').forEach(a => a.addEventListener('click', () => showTab(a.dataset.tab)));
 showTab('removed');
+
+// 3D section: play the looping animation only while it is on screen
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vids = document.querySelectorAll('video[data-autoplay]');
+  if (reduce) return;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause();
+  }), { threshold: 0.4 });
+  vids.forEach(v => io.observe(v));
+})();
+document.querySelectorAll('model-viewer').forEach(mv => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) mv.removeAttribute('auto-rotate');
+});
 </script>
 </body>
 </html>
