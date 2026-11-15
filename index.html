@@ -51,6 +51,8 @@
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+  html, body { overflow-x: clip; }   /* full-bleed dark bands must never cause sideways scroll */
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 Roboto, system-ui, sans-serif; }
   h1, h2, h3 { font-family: "Roboto Condensed", Roboto, sans-serif; line-height: 1.2; }
   h3 { font-size: 20px; margin: 0 0 6px; }
@@ -436,7 +438,7 @@
 
 <main id="main">
 
-  <div class="result" aria-labelledby="result-label">
+  <div class="result" role="region" aria-labelledby="result-label">
     <p class="kicker" id="result-label">The surprising result</p>
     <div class="result-stats">
       <div class="stat stat-1" role="group" aria-label="51% of the dye removed by H2O2 and UV alone in 30 minutes">
@@ -878,6 +880,7 @@ const nRemoved = 100 * (1 - nA / nB), nRemovedSd = 100 * sd(DATA.ncqd.after) / n
     };
     requestAnimationFrame(step);
   }, { threshold: 0.5 });
+  els.forEach(el => { el.textContent = '0'; });   // HTML holds the final numbers for no-JS / reduced motion
   io.observe(document.querySelector('.result'));
 })();
 
@@ -903,7 +906,7 @@ const navObs = new IntersectionObserver(es => es.forEach(e => {
   links.forEach(a => {
     const on = a.getAttribute('href') === '#' + e.target.id;
     a.classList.toggle('active', on);
-    if (on) navList.scrollTo({ left: a.parentElement.offsetLeft - (navList.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+    if (on) navList.scrollTo({ left: a.parentElement.offsetLeft - (navList.clientWidth - a.offsetWidth) / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   });
 }), { rootMargin: '-40% 0px -55% 0px' });
 document.querySelectorAll('main section').forEach(s => navObs.observe(s));
