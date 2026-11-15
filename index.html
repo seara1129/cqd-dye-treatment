@@ -4,7 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CQDs in UV/H₂O₂ Dye Treatment</title>
-<meta name="description" content="Lab photos, every data point, extra charts and a 3D model behind the poster: do carbon quantum dots speed up UV/H₂O₂ breakdown of methylene blue?">
+<meta name="description" content="Lab photos, every data point, extra charts, a 3D model and published microscope images behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CQDs in UV/H₂O₂ Dye Treatment">
+<meta property="og:description" content="Lab photos, every data point, extra charts, a 3D model and published microscope images behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
+<meta property="og:url" content="https://seara1129.github.io/cqd-dye-treatment/">
+<meta property="og:image" content="https://seara1129.github.io/cqd-dye-treatment/img/poster-thumb.jpg">
+<meta property="og:image:width" content="795">
+<meta property="og:image:height" content="1124">
+<meta property="og:image:alt" content="Thumbnail of the research poster on carbon quantum dots in UV/H₂O₂ dye treatment">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -204,13 +215,27 @@
 
   footer { background: var(--navy); color: #c9d8f3; text-align: center; font-size: 14px; padding: 26px 16px 34px; }
   footer a { color: #fff; }
+  footer .foot-meta { display: inline-block; margin-top: 8px; font-size: 13px; opacity: .85; }
 
   dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 92vh; }
   dialog::backdrop { background: rgba(10,20,40,.85); }
   dialog img { max-width: 96vw; max-height: 92vh; border-radius: 8px; }
+
+  /* ---------- accessibility ---------- */
+  a:focus-visible, button:focus-visible, [role="tab"]:focus-visible, summary:focus-visible,
+  img.zoom:focus-visible, video:focus-visible, model-viewer:focus-visible, nav.toc a.nl:focus-visible {
+    outline: 3px solid #1b2f63; outline-offset: 3px;
+  }
+  header a:focus-visible, header button:focus-visible, nav.toc a:focus-visible, nav.toc button:focus-visible,
+  footer a:focus-visible, footer button:focus-visible, .stage3d model-viewer:focus-visible {
+    outline-color: #fff; outline-offset: 2px;
+  }
+  .skip { position: absolute; left: 8px; top: -100px; z-index: 100; padding: 10px 16px; background: #fff; color: #1b2f63; font: 600 15px "Roboto Condensed", sans-serif; border-radius: 6px; text-decoration: none; }
+  .skip:focus, .skip:focus-visible { top: 8px; outline: 3px solid #1b2f63; outline-offset: 2px; }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></symbol>
@@ -244,7 +269,7 @@
   </div>
 </nav>
 
-<main>
+<main id="main">
 
   <!-- 1 OVERVIEW -->
   <section id="poster">
@@ -431,7 +456,7 @@
           <h3>Raw data</h3>
           <a class="btn btn-outline" href="data/all-readings.csv" download="cqd-colorimeter-readings.csv"><svg><use href="#i-dl"/></svg>Download all 216 readings (CSV)</a>
         </div>
-        <p class="from-poster" style="margin:0 0 12px">Mean absorbance at 650 nm for each beaker. The CSV has every reading on all six colour channels.</p>
+        <p class="from-poster" style="margin:0 0 12px">Mean absorbance at 650 nm for each beaker. The CSV has every reading on all six colour channels (<a href="https://github.com/seara1129/cqd-dye-treatment/blob/main/data/README.md">what each column means</a>).</p>
         <div class="tablewrap">
           <table id="raw">
             <thead><tr><th>Date</th><th>Trial</th><th>Condition</th><th class="num">Rep 1</th><th class="num">Rep 2</th><th class="num">Rep 3</th><th class="num">Mean</th><th class="num">Dye removed</th></tr></thead>
@@ -559,13 +584,14 @@
 
 <footer>
   Seara Ng, Tian Yu &amp; Jun Qi Lee · John Monash Science School · Australian Science Fair<br>
-  <a href="poster.pdf" download="CQD-dye-treatment-poster.pdf">Download the poster (PDF)</a> · <a href="#contact">Contact</a>
+  <a href="poster.pdf" download="CQD-dye-treatment-poster.pdf">Download the poster (PDF)</a> · <a href="#contact">Contact</a><br>
+  <span class="foot-meta">Thanks to John Monash Science School for supporting this project. · Last updated <time datetime="2026-11-15">15 November 2026</time></span>
 </footer>
 
 <dialog id="lightbox"><img alt=""></dialog>
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js" integrity="sha384-Ftcjj/GNLxPvzNDftO/oryXB9aGxsGZY9JGqsXG0uUKgQDl9RfDgsx9NJ/4IVNPe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js" integrity="sha384-dug+JxfBvklEQdJ4AYuBBAIScUz0bVN73xpy273gcAwHjb3qI0fXmuYNaNfdyYJG" crossorigin="anonymous"></script>
 <script>
 /* ===== DATA: from "EEI Data - Organised.xlsx" (SPARKvue colorimeter exports, 13–15 Oct 2026) ===== */
 const DATA = {
@@ -629,9 +655,16 @@ const nRemoved = 100 * (1 - nA / nB), nRemovedSd = 100 * sd(DATA.ncqd.after) / n
 
 /* ===== lightbox ===== */
 const lb = document.getElementById('lightbox');
-document.querySelectorAll('img.zoom').forEach(img => img.addEventListener('click', () => {
-  lb.querySelector('img').src = img.src; lb.querySelector('img').alt = img.alt; lb.showModal();
-}));
+document.querySelectorAll('img.zoom').forEach(img => {
+  const open = () => {
+    lb.querySelector('img').src = img.src; lb.querySelector('img').alt = img.alt; lb.showModal();
+  };
+  img.tabIndex = 0; img.setAttribute('role', 'button');
+  img.addEventListener('click', open);
+  img.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  });
+});
 lb.addEventListener('click', () => lb.close());
 
 /* ===== active nav ===== */
