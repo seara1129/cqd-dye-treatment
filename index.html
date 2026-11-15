@@ -170,6 +170,41 @@
   .why h4 { margin: 0 0 4px; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
   .why p { margin: 0 0 14px; }
   .from-poster { font-size: 13px; color: var(--ink-3); }
+  /* scroll reveal (JS adds html.motion and .reveal-ready; uses translate so hover transforms stay free) */
+  html.motion .reveal-ready { transition: opacity .5s ease, translate .5s ease; }
+  html.motion .reveal-ready:not(.in) { opacity: 0; translate: 0 14px; }
+  @media (prefers-reduced-motion: reduce) {
+    html.motion .reveal-ready { transition: none; }
+    html.motion .reveal-ready:not(.in) { opacity: 1; translate: none; }
+  }
+  /* chart to beaker-photo link */
+  .tip-hint { margin: 0 0 8px; font-size: 13px; color: var(--ink-3); }
+  .pick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pick button {
+    padding: 6px 11px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: var(--ink-2);
+    font: 500 13px Roboto, sans-serif; cursor: pointer;
+  }
+  .pick button:hover { border-color: var(--navy); }
+  .pick button[aria-pressed="true"] { border-color: var(--dot-ink, #b4530f); color: var(--dot-ink, #b4530f); background: #fff7ef; }
+  .beaker-detail:not(:empty) { margin-top: 16px; }
+  .bd { position: relative; display: flex; flex-wrap: wrap; gap: 18px; padding: 14px 44px 14px 14px; border: 1px solid var(--line); border-left: 4px solid var(--dot, #f0913a); border-radius: 10px; background: #fafcff; }
+  .bd-close { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; border: 0; border-radius: 8px; background: transparent; color: var(--ink-2); font-size: 22px; line-height: 1; cursor: pointer; }
+  .bd-close:hover { background: #e9eff9; }
+  .bd-photos { display: flex; flex-wrap: wrap; gap: 12px; }
+  .bd-photos figure { margin: 0; width: 220px; max-width: 100%; }
+  .bd-photos img { display: block; width: 100%; height: 150px; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+  .bd-photos figcaption { margin-top: 5px; font-size: 12px; line-height: 1.35; }
+  .bd-read { flex: 1 1 220px; min-width: 0; }
+  .bd-read h4 { margin: 0 0 6px; font: 700 16px "Roboto Condensed", sans-serif; }
+  .bd-read dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; margin: 0; font-size: 14px; }
+  .bd-read dt { color: var(--ink-3); }
+  .bd-read dd { margin: 0; font-variant-numeric: tabular-nums; }
+  @media (max-width: 520px) {
+    .bd { padding: 12px 40px 12px 12px; }
+    .bd-read dl { grid-template-columns: 1fr; gap: 0; }
+    .bd-read dt { margin-top: 6px; font-size: 12px; }
+  }
+  .bd-read .bd-note { margin: 8px 0 0; font-size: 12px; color: var(--ink-3); }
 
   /* ---------- 5 published images ---------- */
   .lit { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
@@ -378,6 +413,7 @@
   <!-- 4 DATA EXPLORER -->
   <section id="data">
     <div class="sh"><span class="hex">4</span><h2>Data</h2></div>
+    <!-- TODO: before/after dye slider once matched photos exist -->
     <div class="stack" style="margin-top:16px">
       <div class="card">
         <div class="tabs" role="tablist" aria-label="Charts">
@@ -683,10 +719,26 @@ document.querySelectorAll('main section').forEach(s => navObs.observe(s));
 /* ===== charts ===== */
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const made = {}, builders = {};
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (window.Chart) {
   Chart.defaults.font.family = 'Roboto, system-ui, sans-serif';
   Chart.defaults.color = css('--ink-3');
   Chart.defaults.maintainAspectRatio = false;
+  if (reduceMotion) Chart.defaults.animation = false;
+  else {
+    Chart.defaults.animation.duration = 800;
+    Chart.defaults.animation.easing = 'easeOutQuart';
+    // once the bars/points have grown, fade the value labels, whiskers and dots in
+    Chart.defaults.animation.onComplete = ({ chart: ch }) => {
+      if (ch.$fade) return;
+      ch.$fade = true;
+      const t0 = performance.now();
+      const step = now => { ch.$a = Math.min(1, (now - t0) / 250); ch.draw(); if (ch.$a < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    };
+  }
+  const labelAlpha = ch => reduceMotion ? 1 : (ch.$a || 0);
+  const gated = fn => ch => { const a = labelAlpha(ch); if (!a) return; ch.ctx.save(); ch.ctx.globalAlpha = a; fn(ch); ch.ctx.restore(); };
   const grid = { color: '#e6ecf5' };
   const tip = { backgroundColor: '#1b2433', padding: 10, cornerRadius: 8, titleFont: { weight: '700' } };
   const legend = { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8, color: css('--ink-2') } };
@@ -695,12 +747,107 @@ if (window.Chart) {
   const dot = (ctx, x, y, fill) => { ctx.save(); ctx.beginPath(); ctx.arc(x, y, 4.5, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke(); ctx.restore(); };
   const whisker = (ctx, x, y0, y1) => { ctx.save(); ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.moveTo(x - 6, y0); ctx.lineTo(x + 6, y0); ctx.moveTo(x - 6, y1); ctx.lineTo(x + 6, y1); ctx.stroke(); ctx.restore(); };
 
+  /* ----- chart to beaker photo link ----- */
+  const G = {
+    controls: { src: 'img/graphs/controls.png', alt: 'SPARKvue graph of controls 1 to 3, flat lines between 0.14 and 0.20', cap: 'SPARKvue graph: controls #1–3 (650 nm)' },
+    cqd: { src: 'img/graphs/cqd-amount.png', alt: 'SPARKvue graph of CQD conc 1 to 3, flat lines near 0.30', cap: 'SPARKvue graph: CQD conc #1–3, 1, 2 and 3 mL (650 nm)' },
+    hp: { src: 'img/graphs/h2o2-6pct-cqd.png', alt: 'SPARKvue graph of HP conc 1 to 3, flat lines near 0.36', cap: 'SPARKvue graph: HP conc #1–3 (650 nm)' },
+    ncqd: { src: 'img/graphs/ncqd-14oct.png', alt: 'SPARKvue graph of three N-CQD beakers after UV, between 1.8 and 2.05', cap: 'SPARKvue graph: N-CQD beakers after UV, 14 Oct (450 nm)' },
+    ncqdAmt: { src: 'img/graphs/ncqd-amount-15oct.png', alt: 'SPARKvue graph of 1, 2 and 3 mL N-CQD before and after UV, between 2.1 and 2.95', cap: 'SPARKvue graph: N-CQD 1–3 mL before and after UV, 15 Oct (450 nm)' }
+  };
+  const uvBox = tag => ({ src: 'img/standard-solution.jpg', alt: 'Methylene-blue beakers in the UV box, each with a label', cap: `Beakers in the UV box; this trial's are labelled '${tag}'` });
+  const f3 = v => v.toFixed(3);
+  const pct = (v, s) => `${v.toFixed(1)}%${s == null ? '' : ` ± ${s.toFixed(1)} (SD)`}`;
+  const signed = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(3);
+  const trialItem = t => ({
+    label: t.label, title: `Trial ${t.id}: ${t.label}`,
+    photos: t.id === 'A' ? [uvBox('control'), G.controls] : t.id === 'C' ? [uvBox('HP conc'), G.hp] : [G.cqd],
+    rows: [['Condition', t.cond], ['Date', t.date], ['Absorbance at 650 nm after UV', t.reps.map(f3).join(', ') + (t.reps.length > 1 ? '' : ' (1 beaker)')],
+           ['Mean', f3(t.mean)], ['Dye removed', pct(t.removed, t.removedSd)]]
+  });
+  const ncqdPhotos = [{ src: 'img/ncqd-after-uv.jpg', alt: 'Three N-CQD beakers numbered 1 to 3 after 30 minutes of UV', cap: 'Beakers numbered 1–3 after 30 min UV (14 Oct)' }, G.ncqd];
+  const ncqdCond = 'MB + 3% H₂O₂ + 1 mL N-CQD';
+  const LINKS = {
+    removed: { noun: 'bar', items: DATA.trials.map(trialItem) },
+    fig2: { noun: 'bar', items: DATA.trials.map(trialItem) },
+    ncqd: { noun: 'bar', items: [0, 1, 2, 3].map(i => {
+      const b = i < 3 ? DATA.ncqd.before[i] : nB, a = i < 3 ? DATA.ncqd.after[i] : nA, name = i < 3 ? `Repeat ${i + 1}` : 'Mean of 3 repeats';
+      return { label: i < 3 ? name : 'Mean', title: `Trial D: ${name}`, photos: ncqdPhotos,
+        rows: [['Condition', ncqdCond], ['Date', '14 Oct'], ['Absorbance at 650 nm', `${f3(b)} before UV, ${f3(a)} after`], ['Change', signed(a - b)],
+               ['Dye removed', i < 3 ? pct(100 * (1 - a / b)) : pct(nRemoved, nRemovedSd)]] };
+    }) },
+    fig3: { noun: 'point', items: DATA.ncqdAmount.map(e => ({
+      label: `${e.vol} mL N-CQD`, title: `Trial E: ${e.vol} mL N-CQD`, photos: [G.ncqdAmt],
+      rows: [['Condition', `MB + ${e.vol} mL N-CQD`], ['Date', '15 Oct'], ['Absorbance at 450 nm', `${f3(e.a450)} before UV, ${f3(e.after450)} after`],
+             ['Change', signed(e.after450 - e.a450)], ['Absorbance at 650 nm', `${f3(e.a650)} before UV`]],
+      note: 'After-UV value is read off the colorimeter screenshot (±0.01). No beaker photo for this trial.' })) }
+  };
+  const accent = () => css('--dot') || '#f0913a';
+  const bindZoom = img => {
+    const open = () => { lb.querySelector('img').src = img.src; lb.querySelector('img').alt = img.alt; lb.showModal(); };
+    img.tabIndex = 0; img.setAttribute('role', 'button');
+    img.addEventListener('click', open);
+    img.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  };
+  const highlight = (ch, i) => {
+    ch.data.datasets.forEach(ds => {
+      if (ch.config.type === 'bar') { ds.borderWidth = ds.data.map((_, j) => j === i ? 3 : 0); ds.borderColor = accent(); }
+    });
+    ch.$sel = i;   // line charts: a ring is drawn round the selected points (see the 'sel' plugin)
+    ch.update('none');
+  };
+  const detailBox = id => document.querySelector(`.panel[data-panel="${id}"] .beaker-detail`);
+  const pickBtns = id => [...document.querySelectorAll(`.panel[data-panel="${id}"] .pick button`)];
+  function selectBeaker(id, i) {
+    const L = LINKS[id], it = L.items[i], box = detailBox(id);
+    L.sel = i;
+    box.innerHTML = `<div class="bd"><button type="button" class="bd-close" aria-label="Close beaker detail">×</button>
+      <div class="bd-photos">${it.photos.map(p => `<figure><img class="zoom" src="${p.src}" alt="${p.alt}" loading="lazy"><figcaption>${p.cap}</figcaption></figure>`).join('')}</div>
+      <div class="bd-read"><h4>${it.title}</h4><dl>${it.rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>${it.note ? `<p class="bd-note">${it.note}</p>` : ''}</div></div>`;
+    box.querySelectorAll('img.zoom').forEach(bindZoom);
+    box.querySelector('.bd-close').addEventListener('click', () => closeBeaker(id, true));
+    pickBtns(id).forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+    if (made[id]) highlight(made[id], i);
+  }
+  function closeBeaker(id, refocus) {
+    const L = LINKS[id], btns = pickBtns(id);
+    L.sel = -1;
+    detailBox(id).innerHTML = '';
+    btns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+    if (made[id]) highlight(made[id], -1);
+    if (refocus && btns.length) (btns[L.last] || btns[0]).focus();
+  }
+  Object.keys(LINKS).forEach(id => {
+    const L = LINKS[id], panel = document.querySelector(`.panel[data-panel="${id}"]`), cb = panel.querySelector('.chartbox');
+    L.sel = -1; L.last = 0;
+    const hint = document.createElement('p');
+    hint.className = 'tip-hint'; hint.textContent = `Tip: click a ${L.noun} to see that beaker's photo and readings.`;
+    const pick = document.createElement('div');
+    pick.className = 'pick'; pick.setAttribute('role', 'group'); pick.setAttribute('aria-label', 'Show beaker photo and readings');
+    L.items.forEach((it, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = it.label; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => { L.last = i; selectBeaker(id, i); });
+      pick.appendChild(b);
+    });
+    const detail = document.createElement('div');
+    detail.className = 'beaker-detail'; detail.setAttribute('aria-live', 'polite');
+    cb.before(hint); cb.after(pick); panel.appendChild(detail);
+  });
+  const hit = (ch, e) => ch.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+  const linkOpts = id => ({
+    onHover: (e, _, ch) => { e.native.target.style.cursor = hit(ch, e).length ? 'pointer' : 'default'; },
+    onClick: (e, _, ch) => { const h = hit(ch, e); if (h.length) { LINKS[id].last = h[0].index; selectBeaker(id, h[0].index); } }
+  });
+
   builders.removed = () => {
     const T = DATA.trials;
     return new Chart(document.getElementById('c-removed'), {
       type: 'bar',
       data: { labels: T.map(t => t.label), datasets: [{ data: T.map(t => t.removed), backgroundColor: T.map(t => t.ctrl ? css('--ctrl') : css('--cqd')), ...bar }] },
       options: {
+        ...linkOpts('removed'),
+        animations: { y: { from: ctx => ctx.chart.scales.y.getPixelForValue(0) } },
         plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
           label: c => `${c.parsed.y.toFixed(1)}% of dye removed`,
           afterLabel: c => { const t = T[c.dataIndex]; return t.removedSd == null ? '1 beaker' : `± ${t.removedSd.toFixed(1)}% (SD, 3 beakers)`; }
@@ -710,7 +857,7 @@ if (window.Chart) {
           x: { grid: { display: false } }
         }
       },
-      plugins: [{ id: 'lbl', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'lbl', afterDatasetsDraw: gated(ch => {
         const { ctx, scales: { y } } = ch;
         ch.getDatasetMeta(0).data.forEach((b, i) => {
           const t = T[i]; let top = Math.min(b.y, b.base);
@@ -720,7 +867,7 @@ if (window.Chart) {
           }
           text(ctx, `${Math.round(t.removed)}%`, b.x, top - 8, 'center', 700);
         });
-      }}]
+      })}]
     });
   };
 
@@ -764,13 +911,14 @@ if (window.Chart) {
         { label: 'After 30 min UV', data: a, backgroundColor: css('--ncqd'), ...bar }
       ]},
       options: {
+        ...linkOpts('ncqd'),
         datasets: { bar: { categoryPercentage: .7, barPercentage: .9 } },
         plugins: { legend, tooltip: { ...tip, callbacks: { label: c => `${c.dataset.label}: ${c.parsed.y.toFixed(3)}` } } },
         scales: { y: { beginAtZero: true, max: 1, grid, title: { display: true, text: 'Absorbance at 650 nm' }, ticks: { stepSize: 0.2 } }, x: { grid: { display: false } } }
       },
-      plugins: [{ id: 'lbl', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'lbl', afterDatasetsDraw: gated(ch => {
         [b, a].forEach((d, k) => ch.getDatasetMeta(k).data.forEach((r, i) => text(ch.ctx, d[i].toFixed(2), r.x, r.y - 6)));
-      }}]
+      })}]
     });
   };
 
@@ -808,7 +956,7 @@ if (window.Chart) {
   };
 
   builders.fig3 = () => {
-    const E = DATA.ncqdAmount, pts = c => ({ borderColor: c, backgroundColor: c, borderWidth: 2, pointRadius: 5, pointHoverRadius: 7, pointBorderColor: '#fff', pointBorderWidth: 2 });
+    const E = DATA.ncqdAmount, pts = c => ({ borderColor: c, backgroundColor: c, borderWidth: 2, pointRadius: 5, pointHoverRadius: 7, pointBorderColor: '#fff', pointBorderWidth: 2, hitRadius: 12 });
     return new Chart(document.getElementById('c-fig3'), {
       type: 'line',
       data: { labels: E.map(e => e.vol + ' mL'), datasets: [
@@ -816,6 +964,7 @@ if (window.Chart) {
         { label: 'After 30 min UV', data: E.map(e => e.after450), ...pts(css('--ncqd')) }
       ]},
       options: {
+        ...linkOpts('fig3'),
         interaction: { mode: 'index', intersect: false },
         layout: { padding: { right: 70 } },
         plugins: { legend, tooltip: { ...tip, callbacks: {
@@ -825,9 +974,15 @@ if (window.Chart) {
         }}},
         scales: { y: { min: 2.0, max: 3.1, grid, title: { display: true, text: 'Absorbance at 450 nm' }, ticks: { stepSize: 0.2 } }, x: { grid: { display: false }, title: { display: true, text: 'N-CQD solution added' } } }
       },
-      plugins: [{ id: 'end', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'sel', afterDatasetsDraw(ch) {
+        if (!(ch.$sel >= 0)) return;
+        ch.data.datasets.forEach((_, k) => {
+          const p = ch.getDatasetMeta(k).data[ch.$sel];
+          ch.ctx.save(); ch.ctx.beginPath(); ch.ctx.arc(p.x, p.y, 8, 0, Math.PI * 2); ch.ctx.lineWidth = 3; ch.ctx.strokeStyle = accent(); ch.ctx.stroke(); ch.ctx.restore();
+        });
+      }}, { id: 'end', afterDatasetsDraw: gated(ch => {
         ch.data.datasets.forEach((ds, i) => { const pt = ch.getDatasetMeta(i).data.at(-1); text(ch.ctx, i ? 'After UV' : 'Before UV', pt.x + 10, pt.y + (i ? 14 : -4), 'left', 700); });
-      }}]
+      })}]
     });
   };
 
@@ -837,34 +992,66 @@ if (window.Chart) {
       type: 'bar',
       data: { labels: T.map(t => t.label), datasets: [{ data: T.map(t => t.mean), backgroundColor: T.map(t => t.ctrl ? css('--ctrl') : css('--cqd')), ...bar }] },
       options: {
+        ...linkOpts('fig2'),
         plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
           label: c => `Mean absorbance ${c.parsed.y.toFixed(3)}`,
           afterLabel: c => { const r = T[c.dataIndex].reps; return r.length > 1 ? `Beakers: ${r.map(v => v.toFixed(3)).join(', ')}` : '1 beaker'; }
         }}},
         scales: { y: { beginAtZero: true, max: 0.45, grid, title: { display: true, text: 'Absorbance at 650 nm' }, ticks: { stepSize: 0.1 } }, x: { grid: { display: false } } }
       },
-      plugins: [{ id: 'dots', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'dots', afterDatasetsDraw: gated(ch => {
         const { ctx, scales: { y } } = ch;
         ch.getDatasetMeta(0).data.forEach((b, i) => {
           const r = T[i].reps; let top = b.y;
           if (r.length > 1) r.forEach((v, j) => { const py = y.getPixelForValue(v); dot(ctx, b.x + (j - 1) * 11, py, css('--ink')); top = Math.min(top, py - 4); });
           text(ctx, T[i].mean.toFixed(3), b.x, top - 8);
         });
-      }}]
+      })}]
     });
   };
 }
 
 /* ===== tabs ===== */
 const tabs = [...document.querySelectorAll('.tabs button')];
+let activeTab = 'removed', chartsLive = false;   // charts are built only once the chart card is on screen, so the growth animation is seen
 function showTab(id) {
+  activeTab = id;
   tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
   document.querySelectorAll('.panel').forEach(p => p.hidden = p.dataset.panel !== id);
-  if (builders[id] && !made[id]) made[id] = builders[id]();
+  if (chartsLive && builders[id] && !made[id]) made[id] = builders[id]();
 }
-tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
-document.querySelectorAll('a[data-tab]').forEach(a => a.addEventListener('click', () => showTab(a.dataset.tab)));
+tabs.forEach(t => t.addEventListener('click', () => { chartsLive = true; showTab(t.dataset.tab); }));
+document.querySelectorAll('a[data-tab]').forEach(a => a.addEventListener('click', () => { chartsLive = true; showTab(a.dataset.tab); }));
 showTab('removed');
+(() => {
+  const go = () => { chartsLive = true; showTab(activeTab); };
+  const card = document.querySelector('#data .panel:not([hidden]) .chartbox');
+  if (!('IntersectionObserver' in window) || !card) { go(); return; }
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); go(); } }, { threshold: 0.3 });
+  io.observe(card);
+})();
+
+// fade cards in as they scroll into view (only hidden once JS has added html.motion)
+(() => {
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+  const els = document.querySelectorAll('.card, .glance > div, .tl-step, .lit figure, .result');
+  const done = el => setTimeout(() => { el.classList.remove('reveal-ready'); el.style.transitionDelay = ''; }, 800);
+  const io = new IntersectionObserver(es => {
+    let n = 0;
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      e.target.style.transitionDelay = Math.min(n++, 2) * 40 + 'ms';
+      e.target.classList.add('in');
+      done(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => {
+    el.classList.add('reveal-ready');
+    if (el.getBoundingClientRect().top < innerHeight) { el.classList.add('in'); done(el); } else io.observe(el);
+  });
+  document.documentElement.classList.add('motion');
+})();
 
 // 3D section: play the looping animation only while it is on screen
 (() => {
