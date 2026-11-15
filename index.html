@@ -186,15 +186,43 @@
   .adds a:hover { background: #c9d9f4; }
 
   /* ---------- 2 lab timeline ---------- */
-  .timeline { position: relative; }
-  .tl-step { display: grid; grid-template-columns: 1fr 1.1fr; gap: 22px; align-items: center; background: var(--card); border-radius: var(--radius); padding: 16px; }
+  .timeline { position: relative; padding-left: 52px; }
+  .tl-step { position: relative; display: grid; grid-template-columns: 1fr 1.1fr; gap: 22px; align-items: center; background: var(--card); border-radius: var(--radius); padding: 16px; }
   .tl-step + .tl-step { margin-top: 16px; }
   .tl-step:nth-child(even) .tl-media { order: 2; }
   .tl-media img, .tl-media .placeholder { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 10px; min-height: 0; }
-  .tl-num { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; font-size: 14px; margin-right: 8px; vertical-align: 2px; }
   .tl-body p { margin: 6px 0 0; }
   .labnote { margin-top: 10px; padding: 8px 12px; border-left: 3px solid var(--bar); background: #f5f8fd; color: var(--ink-2); font-size: 14px; font-style: italic; }
-  @media (max-width: 620px) { .tl-step { grid-template-columns: 1fr; } .tl-step:nth-child(even) .tl-media { order: 0; } }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+  /* connector line + numbered markers */
+  .tl-dot { position: absolute; left: -52px; top: 16px; z-index: 1; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--navy); color: #fff; font: 700 15px "Roboto Condensed", Roboto, sans-serif; box-shadow: 0 0 0 3px #fff, 0 1px 4px rgba(20,40,80,.3); }
+  .tl-step:not(:last-child)::after { content: ""; position: absolute; left: -37.5px; top: 32px; width: 3px; height: calc(100% + 16px); background: var(--bar); }
+  .tl-step:nth-child(2)::after { background: linear-gradient(var(--bar), var(--glow, #3fdc8a)); }
+  .tl-step:nth-child(3)::after { background: var(--glow, #3fdc8a); }
+  .tl-step:nth-child(4)::after { background: linear-gradient(var(--glow, #3fdc8a), var(--bar)); }
+
+  /* method card (step 1, no photo yet) */
+  .method { width: 100%; aspect-ratio: 16/10; border-radius: 10px; background: #f3f6fb; border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 12px; }
+  .method svg { width: min(46%, 170px); height: auto; min-height: 0; flex: 0 1 auto; }
+  .method ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .method li { padding: 4px 11px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); font-size: 14px; font-weight: 500; }
+  .method li b { color: var(--dot-ink, #b4530f); font-weight: 700; }
+
+  /* spotlight step (glowing beakers) */
+  .tl-step.spot { background: var(--deep, #0e1a33); color: #fff; grid-template-columns: 1.5fr 1fr; gap: 28px; padding: 20px; }
+  .tl-step.spot h3 { color: var(--glow, #3fdc8a); font-size: 24px; }
+  .tl-step.spot p { color: #dbe6fb; }
+  .tl-step.spot .tl-media img { aspect-ratio: 688/568; max-height: 640px; border-radius: 12px; box-shadow: 0 0 0 1px rgba(63,220,138,.4), 0 0 38px rgba(63,220,138,.35); }
+  .tl-step.spot .tl-dot { background: var(--glow, #3fdc8a); color: var(--deep, #0e1a33); box-shadow: 0 0 0 3px #fff, 0 0 14px rgba(63,220,138,.7); }
+  @media (max-width: 620px) {
+    .timeline { padding-left: 40px; }
+    .tl-step { grid-template-columns: 1fr; gap: 14px; }
+    .tl-step:nth-child(even) .tl-media { order: 0; }
+    .tl-step.spot { grid-template-columns: 1fr; padding: 16px; }
+    .tl-dot { left: -40px; width: 30px; height: 30px; font-size: 14px; }
+    .tl-step:not(:last-child)::after { left: -26.5px; top: 30px; }
+  }
 
   /* ---------- 3 3D model ---------- */
   #model { position: relative; isolation: isolate; margin-top: 40px; padding: 48px 0; color: #fff;
@@ -404,44 +432,70 @@
     <p class="lede">Detailed steps + observations</p>
     <div class="timeline">
       <div class="tl-step">
-        <div class="tl-media"><div class="placeholder"><div><strong>Photo: microwaving the precursor</strong>citric acid + water, 8 min</div></div></div>
+        <span class="tl-dot" aria-hidden="true">1</span>
+        <div class="tl-media">
+          <!-- TODO: replace with a photo of the beaker in the microwave when available -->
+          <div class="method" role="img" aria-label="Illustration of a beaker in a microwave. Recipe: 2 grams citric acid, 20 millilitres water, microwave for 8 minutes.">
+            <svg viewBox="0 0 160 100" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="6" y="10" width="148" height="80" rx="8"/>
+              <rect x="14" y="18" width="100" height="64" rx="4"/>
+              <line x1="124" y1="24" x2="124" y2="76"/>
+              <circle cx="139" cy="32" r="5"/>
+              <circle cx="139" cy="52" r="5"/>
+              <line x1="134" y1="70" x2="144" y2="70"/>
+              <path d="M54 34 V42 L46 74 Q45 78 49 78 H79 Q83 78 82 74 L74 42 V34 M51 34 H77"/>
+              <path d="M49 62 H79 L81.6 73 Q82.6 76.8 79 76.8 H49 Q45.4 76.8 46.4 73 Z" fill="var(--dot, #f0913a)" stroke="var(--dot, #f0913a)"/>
+            </svg>
+            <ul>
+              <li><b>2 g</b> citric acid</li>
+              <li><b>20 mL</b> water</li>
+              <li>Microwave · <b>8 min</b></li>
+            </ul>
+          </div>
+        </div>
         <div class="tl-body">
-          <h3><span class="tl-num">1</span>Making the carbon dots</h3>
+          <h3><span class="vh">Step 1: </span>Making the carbon dots</h3>
           <p>2 g citric acid dissolved in 20 mL water, then microwaved for 8 minutes.</p>
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">2</span>
         <div class="tl-media"><img class="zoom" src="img/cqd-solutions.jpg" alt="Dark N-CQD solution beside yellow CQD solution"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">2</span>The nitrogen-doped batch</h3>
+          <h3><span class="vh">Step 2: </span>The nitrogen-doped batch</h3>
           <p>Same recipe plus 4 g urea, microwaved in 30-second bursts for 3 minutes. The result (left) was much darker than plain CQDs (right).</p>
         </div>
       </div>
-      <div class="tl-step">
+      <div class="tl-step spot">
+        <span class="tl-dot" aria-hidden="true">3</span>
         <div class="tl-media"><img class="zoom" src="img/fluorescence.jpg" alt="Beakers glowing bright green under UV light"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">3</span>Checking they glow</h3>
-          <p>Under a UV torch the samples fluoresced bright green, a sign that carbon dots had formed.</p>
+          <h3><span class="vh">Step 3: </span>Checking they glow</h3>
+          <p>Under a UV torch the samples fluoresced bright green, a sign that carbon dots had formed. Carbon dots absorb UV light and re-emit it as visible green light.</p>
+          <!-- TODO: add a "UV off / UV on" comparison slider here if a normal-light photo of the same beakers is taken -->
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">4</span>
         <div class="tl-media"><img class="zoom" src="img/standard-solution.jpg" loading="lazy" alt="Labelled beakers of methylene blue solution in the UV box"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">4</span>Dosing the dye</h3>
+          <h3><span class="vh">Step 4: </span>Dosing the dye</h3>
           <p>50 mL of 10 ppm methylene blue per beaker, with 1 mL H₂O₂ and 0–3 mL of CQD or N-CQD solution.</p>
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">5</span>
         <div class="tl-media"><img class="zoom" src="img/empty-dark-box.jpg" loading="lazy" alt="The cardboard dark box used for the 30-minute UV exposure, with the UV torch beside it"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">5</span>30 minutes under UV</h3>
+          <h3><span class="vh">Step 5: </span>30 minutes under UV</h3>
           <p>Each beaker sat under a handheld UV torch inside a closed dark box for 30 minutes.</p>
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">6</span>
         <div class="tl-media"><img class="zoom" src="img/ncqd-after-uv.jpg" loading="lazy" alt="Three N-CQD beakers, numbered 1 to 3, after 30 minutes under UV"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">6</span>Measuring absorbance</h3>
+          <h3><span class="vh">Step 6: </span>Measuring absorbance</h3>
           <p>A colorimeter read absorbance on six colour channels from 450 to 650 nm. Methylene blue shows up best on the 650 nm (red) channel, closest to its 664 nm peak (see the <a href="#data" data-tab="fingerprint">Absorbance spectrum</a> chart).</p>
         </div>
       </div>
