@@ -11,11 +11,14 @@
 <meta property="og:title" content="CQDs in UV/H₂O₂ Dye Treatment">
 <meta property="og:description" content="Lab photos, every data point, extra charts, a 3D model and published microscope images behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
 <meta property="og:url" content="https://seara1129.github.io/cqd-dye-treatment/">
-<meta property="og:image" content="https://seara1129.github.io/cqd-dye-treatment/img/poster-thumb.jpg">
-<meta property="og:image:width" content="795">
-<meta property="og:image:height" content="1124">
-<meta property="og:image:alt" content="Thumbnail of the research poster on carbon quantum dots in UV/H₂O₂ dye treatment">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://seara1129.github.io/cqd-dye-treatment/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glowing carbon quantum dot beside the title Carbon Quantum Dots in UV/H₂O₂ Dye Treatment">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://seara1129.github.io/cqd-dye-treatment/img/share.jpg">
+<meta name="twitter:image:alt" content="Glowing carbon quantum dot beside the title Carbon Quantum Dots in UV/H₂O₂ Dye Treatment">
+<meta name="theme-color" content="#2b4a8b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -39,9 +42,17 @@
     --violet: #7a5ccf;
     --placeholder: #f3f6fb;
     --radius: 14px;
+    --dot: #f0913a;
+    --dot-ink: #b4530f;
+    --glow: #3fdc8a;
+    --glow-ink: #137a45;
+    --deep: #0e1a33;
+    --deep-2: #16264a;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+  html, body { overflow-x: clip; }   /* full-bleed dark bands must never cause sideways scroll */
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 Roboto, system-ui, sans-serif; }
   h1, h2, h3 { font-family: "Roboto Condensed", Roboto, sans-serif; line-height: 1.2; }
   h3 { font-size: 20px; margin: 0 0 6px; }
@@ -52,7 +63,13 @@
   .btn {
     display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px;
     font: 700 15px Roboto, sans-serif; text-decoration: none; border: 2px solid transparent; cursor: pointer;
+    transition: box-shadow .2s, background-color .2s, border-color .2s;
   }
+  .btn:hover, .btn:focus-visible { box-shadow: 0 0 0 4px rgba(255,255,255,.28), 0 6px 18px rgba(20,40,80,.22); }
+  .btn-solid:hover, .btn-solid:focus-visible, .btn-outline:hover, .btn-outline:focus-visible { box-shadow: 0 0 0 4px rgba(43,74,139,.2), 0 6px 18px rgba(43,74,139,.28); }
+  .btn-cta { background: var(--dot); color: var(--ink); }
+  .btn-cta:hover, .btn-cta:focus-visible { background: #f4a257; box-shadow: 0 0 0 4px rgba(240,145,58,.25), 0 8px 24px rgba(240,145,58,.35); }
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
   .btn svg { width: 18px; height: 18px; flex: none; }
   .btn-solid { background: var(--navy); color: #fff; }
   .btn-solid:hover { background: #213b72; }
@@ -64,18 +81,67 @@
   /* ---------- hero ---------- */
   .hero {
     position: relative; overflow: hidden; color: #fff; text-align: center;
-    background: linear-gradient(135deg, var(--hero-a), var(--hero-b)); padding: 44px 16px 40px;
+    background: linear-gradient(135deg, var(--hero-a), var(--hero-b)); padding: 28px 16px 32px;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0; opacity: .3;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='3'%3E%3Cpath d='M30 2 L60 2 L75 28 L60 54 L30 54 L15 28 Z'/%3E%3Cpath d='M90 54 L120 54 L135 80 L120 106 L90 106 L75 80 Z'/%3E%3Cpath d='M-30 54 L0 54 L15 80 L0 106 L-30 106 L-45 80 Z'/%3E%3C/g%3E%3C/svg%3E");
   }
   .hero > * { position: relative; }
-  .hero .logo { width: 160px; margin: 0 auto 18px; mix-blend-mode: screen; }
+  .hero-inner { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .hero-text { width: 100%; min-width: 0; }
+  .hero-art { order: -1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .hero-dot { position: relative; width: 220px; height: 220px; }
+  .hero-dot::before {
+    content: ""; position: absolute; inset: -22%; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(240,145,58,.5) 0%, rgba(240,145,58,.18) 40%, rgba(240,145,58,0) 68%);
+    animation: breathe 6s ease-in-out infinite;
+  }
+  .hero-dot video {
+    position: relative; display: block; width: 100%; height: 100%; object-fit: cover; background: #0b1626;
+    border-radius: 28px; border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 18px 40px rgba(14,26,51,.35), 0 0 48px rgba(240,145,58,.28);
+  }
+  @media (max-width: 859px) { .hero .explore { display: none; } .hero-dot { width: 200px; height: 200px; } .hero-dot video { border-radius: 20px; } }
+  @keyframes breathe { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .hero-dot::before { animation: none; } }
+  .hero .explore { margin-top: 12px; padding: 5px 14px; border-radius: 999px; background: rgba(14,26,51,.55); color: #fff; text-decoration: none; font: 500 14px "Roboto Condensed", Roboto, sans-serif; letter-spacing: .02em; }
+  .hero .explore:hover { background: rgba(14,26,51,.75); }
+  .hero .logo { width: 140px; margin: 0 auto 14px; mix-blend-mode: screen; }
   .hero h1 { font-size: clamp(30px, 6vw, 54px); margin: 0 0 12px; text-shadow: 0 2px 10px rgba(30,50,100,.25); }
   .hero p.rq { font: 700 clamp(17px, 2.6vw, 23px)/1.35 "Roboto Condensed", sans-serif; max-width: 800px; margin: 0 auto 10px; }
   .hero .meta { font-size: 14px; opacity: .92; margin: 0 0 22px; }
   .hero .ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  @media (min-width: 860px) {
+    .hero { padding: 24px 24px 28px; text-align: left; }
+    .hero-inner { flex-direction: row; justify-content: space-between; gap: 32px; }
+    .hero-text { flex: 1; width: auto; }
+    .hero-art { order: 0; flex: none; }
+    .hero-dot { width: 360px; height: 360px; }
+    .hero .logo { margin: 0 0 14px; }
+    .hero p.rq { margin: 0 0 10px; }
+    .hero .ctas { justify-content: flex-start; }
+  }
+
+  /* ---------- results callout ---------- */
+  .result { margin-top: 28px; padding: 22px 20px 20px; background: var(--card); border-radius: var(--radius); box-shadow: 0 4px 18px rgba(20,40,80,.1); }
+  .result .kicker { margin: 0 0 14px; font: 700 13px Roboto, sans-serif; letter-spacing: .09em; text-transform: uppercase; color: var(--dot-ink); }
+  .result-stats { display: grid; grid-template-columns: 1fr; gap: 14px; align-items: center; }
+  .result .stat { margin: 0; }
+  .result .big { display: block; font: 700 clamp(44px, 7vw, 72px)/1 "Roboto Condensed", sans-serif; font-variant-numeric: tabular-nums; }
+  .result .stat-1 .big { color: var(--navy); }
+  .result .stat-2 .big { color: var(--dot-ink); }
+  .result .cap { display: block; margin-top: 6px; color: var(--ink-2); font-size: 15px; line-height: 1.4; }
+  .result .rbar { height: 8px; margin-top: 10px; border-radius: 999px; background: #eef2f9; overflow: hidden; }
+  .result .rbar i { display: block; height: 100%; border-radius: 999px; }
+  .result .stat-1 .rbar i { width: 51%; background: var(--navy); }
+  .result .stat-2 .rbar i { width: 12%; background: var(--dot); }
+  .result .arrow { display: none; font: 700 40px "Roboto Condensed", sans-serif; color: var(--ink-3); }
+  .result .ctx { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink); }
+  @media (min-width: 760px) {
+    .result-stats { grid-template-columns: 1fr auto 1fr; gap: 28px; }
+    .result .arrow { display: block; }
+  }
 
   /* ---------- sticky nav ---------- */
   nav.toc { position: sticky; top: 0; z-index: 10; background: rgba(43,74,139,.97); box-shadow: 0 2px 10px rgba(0,0,0,.12); }
@@ -130,26 +196,67 @@
   .adds a:hover { background: #c9d9f4; }
 
   /* ---------- 2 lab timeline ---------- */
-  .timeline { position: relative; }
-  .tl-step { display: grid; grid-template-columns: 1fr 1.1fr; gap: 22px; align-items: center; background: var(--card); border-radius: var(--radius); padding: 16px; }
+  .timeline { position: relative; padding-left: 52px; }
+  .tl-step { position: relative; display: grid; grid-template-columns: 1fr 1.1fr; gap: 22px; align-items: center; background: var(--card); border-radius: var(--radius); padding: 16px; }
   .tl-step + .tl-step { margin-top: 16px; }
   .tl-step:nth-child(even) .tl-media { order: 2; }
   .tl-media img, .tl-media .placeholder { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 10px; min-height: 0; }
-  .tl-num { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; font-size: 14px; margin-right: 8px; vertical-align: 2px; }
   .tl-body p { margin: 6px 0 0; }
   .labnote { margin-top: 10px; padding: 8px 12px; border-left: 3px solid var(--bar); background: #f5f8fd; color: var(--ink-2); font-size: 14px; font-style: italic; }
-  @media (max-width: 620px) { .tl-step { grid-template-columns: 1fr; } .tl-step:nth-child(even) .tl-media { order: 0; } }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+  /* connector line + numbered markers */
+  .tl-dot { position: absolute; left: -52px; top: 16px; z-index: 1; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--navy); color: #fff; font: 700 15px "Roboto Condensed", Roboto, sans-serif; box-shadow: 0 0 0 3px #fff, 0 1px 4px rgba(20,40,80,.3); }
+  .tl-step:not(:last-child)::after { content: ""; position: absolute; left: -37.5px; top: 32px; width: 3px; height: calc(100% + 16px); background: var(--bar); }
+  .tl-step:nth-child(2)::after { background: linear-gradient(var(--bar), var(--glow, #3fdc8a)); }
+  .tl-step:nth-child(3)::after { background: var(--glow, #3fdc8a); }
+  .tl-step:nth-child(4)::after { background: linear-gradient(var(--glow, #3fdc8a), var(--bar)); }
+
+  /* method card (step 1, no photo yet) */
+  .method { width: 100%; aspect-ratio: 16/10; border-radius: 10px; background: #f3f6fb; border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 12px; }
+  .method svg { width: min(46%, 170px); height: auto; min-height: 0; flex: 0 1 auto; }
+  .method ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .method li { padding: 4px 11px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); font-size: 14px; font-weight: 500; }
+  .method li b { color: var(--dot-ink, #b4530f); font-weight: 700; }
+
+  /* spotlight step (glowing beakers) */
+  .tl-step.spot { background: var(--deep, #0e1a33); color: #fff; grid-template-columns: 1.5fr 1fr; gap: 28px; padding: 20px; }
+  .tl-step.spot h3 { color: var(--glow, #3fdc8a); font-size: 24px; }
+  .tl-step.spot p { color: #dbe6fb; }
+  .tl-step.spot .tl-media img { aspect-ratio: 688/568; max-height: 640px; border-radius: 12px; box-shadow: 0 0 0 1px rgba(63,220,138,.4), 0 0 38px rgba(63,220,138,.35); }
+  .tl-step.spot .tl-dot { background: var(--glow, #3fdc8a); color: var(--deep, #0e1a33); box-shadow: 0 0 0 3px #fff, 0 0 14px rgba(63,220,138,.7); }
+  @media (max-width: 620px) {
+    .timeline { padding-left: 40px; }
+    .tl-step { grid-template-columns: 1fr; gap: 14px; }
+    .tl-step:nth-child(even) .tl-media { order: 0; }
+    .tl-step.spot { grid-template-columns: 1fr; padding: 16px; }
+    .tl-dot { left: -40px; width: 30px; height: 30px; font-size: 14px; }
+    .tl-step:not(:last-child)::after { left: -26.5px; top: 30px; }
+  }
 
   /* ---------- 3 3D model ---------- */
+  #model { position: relative; isolation: isolate; margin-top: 40px; padding: 48px 0; color: #fff;
+    background: var(--deep); box-shadow: 0 0 0 100vmax var(--deep); clip-path: inset(0 -100vmax); }
+  #model::before {
+    content: ""; position: absolute; inset: 0 -100vmax; z-index: -1; pointer-events: none; opacity: .06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M30 2 L60 2 L75 28 L60 54 L30 54 L15 28 Z'/%3E%3Cpath d='M90 54 L120 54 L135 80 L120 106 L90 106 L75 80 Z'/%3E%3Cpath d='M-30 54 L0 54 L15 80 L0 106 L-30 106 L-45 80 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  #model .sh .hex { background: var(--dot); color: var(--ink); }
+  #model .sh h2 { background: var(--deep-2); color: #fff; border-left: 4px solid var(--dot); }
+  #model .lede { color: #c9d8f3; }
+  #model a { color: #fff; }
+  #model a:focus-visible, #model video:focus-visible, #model model-viewer:focus-visible { outline-color: #fff; }
   .stage3d { position: relative; height: 440px; border-radius: var(--radius); overflow: hidden;
     background: radial-gradient(circle at 50% 40%, #2c4a86, #101b33 75%); }
   .stage3d model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: transparent; }
   .mv-hint { display: grid; place-items: center; height: 100%; color: #dbe6fb; font-size: 15px; }
   .mv-help { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); padding: 4px 12px; border-radius: 999px;
     background: rgba(255,255,255,.14); color: #e6eefc; font-size: 13px; white-space: nowrap; pointer-events: none; }
-  @media (max-width: 620px) { .stage3d { height: 320px; } }
+  @media (max-width: 620px) { .stage3d { height: 320px; } .mv-help { white-space: normal; text-align: center; width: max-content; max-width: 90%; } }
   .vids { margin-top: 16px; }
   .vids figure { margin: 0; }
+  .vids .card { background: var(--deep-2); border: 1px solid rgba(255,255,255,.08); box-shadow: none; color: #fff; }
+  .vids figcaption { color: #c9d8f3; }
   .vids video { width: 100%; aspect-ratio: 16/9; display: block; border-radius: 10px; background: #0b1426; }
 
   /* ---------- 4 data explorer ---------- */
@@ -170,6 +277,41 @@
   .why h4 { margin: 0 0 4px; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
   .why p { margin: 0 0 14px; }
   .from-poster { font-size: 13px; color: var(--ink-3); }
+  /* scroll reveal (JS adds html.motion and .reveal-ready; uses translate so hover transforms stay free) */
+  html.motion .reveal-ready { transition: opacity .5s ease, translate .5s ease; }
+  html.motion .reveal-ready:not(.in) { opacity: 0; translate: 0 14px; }
+  @media (prefers-reduced-motion: reduce) {
+    html.motion .reveal-ready { transition: none; }
+    html.motion .reveal-ready:not(.in) { opacity: 1; translate: none; }
+  }
+  /* chart to beaker-photo link */
+  .tip-hint { margin: 0 0 8px; font-size: 13px; color: var(--ink-3); }
+  .pick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pick button {
+    padding: 6px 11px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: var(--ink-2);
+    font: 500 13px Roboto, sans-serif; cursor: pointer;
+  }
+  .pick button:hover { border-color: var(--navy); }
+  .pick button[aria-pressed="true"] { border-color: var(--dot-ink, #b4530f); color: var(--dot-ink, #b4530f); background: #fff7ef; }
+  .beaker-detail:not(:empty) { margin-top: 16px; }
+  .bd { position: relative; display: flex; flex-wrap: wrap; gap: 18px; padding: 14px 44px 14px 14px; border: 1px solid var(--line); border-left: 4px solid var(--dot, #f0913a); border-radius: 10px; background: #fafcff; }
+  .bd-close { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; border: 0; border-radius: 8px; background: transparent; color: var(--ink-2); font-size: 22px; line-height: 1; cursor: pointer; }
+  .bd-close:hover { background: #e9eff9; }
+  .bd-photos { display: flex; flex-wrap: wrap; gap: 12px; }
+  .bd-photos figure { margin: 0; width: 220px; max-width: 100%; }
+  .bd-photos img { display: block; width: 100%; height: 150px; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+  .bd-photos figcaption { margin-top: 5px; font-size: 12px; line-height: 1.35; }
+  .bd-read { flex: 1 1 220px; min-width: 0; }
+  .bd-read h4 { margin: 0 0 6px; font: 700 16px "Roboto Condensed", sans-serif; }
+  .bd-read dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; margin: 0; font-size: 14px; }
+  .bd-read dt { color: var(--ink-3); }
+  .bd-read dd { margin: 0; font-variant-numeric: tabular-nums; }
+  @media (max-width: 520px) {
+    .bd { padding: 12px 40px 12px 12px; }
+    .bd-read dl { grid-template-columns: 1fr; gap: 0; }
+    .bd-read dt { margin-top: 6px; font-size: 12px; }
+  }
+  .bd-read .bd-note { margin: 8px 0 0; font-size: 12px; color: var(--ink-3); }
 
   /* ---------- 5 published images ---------- */
   .lit { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
@@ -180,6 +322,14 @@
   .lit .wide img { max-width: 760px; margin: 0 auto; }
   .lit .credit { margin: 8px 0 0; font-size: 13px; color: var(--ink-3); }
   @media (max-width: 860px) { .lit { grid-template-columns: 1fr; } }
+  .lit .tech { display: flex; align-items: center; gap: 10px; }
+  .tech-ic { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 10px; background: #e3ecfa; color: var(--navy); }
+  .tech-ic svg { width: 20px; height: 20px; flex: none; }
+  .card { transition: transform .2s ease, box-shadow .2s ease; }
+  @media (hover: hover) { .card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(20,40,80,.12); } }
+  .lit figure img { transition: transform .35s ease; }
+  @media (hover: hover) { .lit figure:hover img { transform: scale(1.025); } }
+  @media (prefers-reduced-motion: reduce) { .card, .lit figure img { transition: none; } .card:hover { transform: none; } .lit figure:hover img { transform: none; } }
 
   .tablewrap { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; font-size: 15px; }
@@ -241,16 +391,33 @@
   <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-tem" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5 10.5 3l3.6 8.2-3 1.3ZM12.5 11.5c2.4.2 4.5 2 4.5 4.8v2.2M5.5 18.5h13M10.5 13.8v4.7M8 21h10"/></g></symbol>
+  <symbol id="i-ftir" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 7h3.5l1.5 5 1.5-5h3l1.5 8 1.5-8h3l1 3 1-3H22"/></symbol>
+  <symbol id="i-xps" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="2"/><ellipse cx="10" cy="12" rx="8" ry="3.5" transform="rotate(-25 10 12)"/><circle cx="12.4" cy="7.6" r="1"/><path d="M14.5 5.5 20.5 2.5M16.5 2.5h4v4"/></g></symbol>
+  <symbol id="i-zeta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M3.5 5.5h2.5M18 5.5h2.5M3.5 18.5h2.5M18 18.5h2.5"/></g></symbol>
+  <symbol id="i-uvvis" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 15 16H3Z"/><path d="M1.5 10.5H6M12 10.5l9-4M12 10.5h9M12 10.5l9 4"/></g></symbol>
 </svg>
 
 <header class="hero">
-  <img class="logo" src="img/logo.png" alt="John Monash Science School">
-  <h1>Carbon Quantum Dots in UV/H<sub>2</sub>O<sub>2</sub> Dye Treatment</h1>
-  <p class="rq">How does adding CQDs or N-CQDs affect the breakdown of methylene blue by H<sub>2</sub>O<sub>2</sub> and UV light?</p>
-  <p class="meta">Seara Ng, Tian Yu &amp; Jun Qi Lee · Australian Science Fair</p>
-  <div class="ctas">
-    <a class="btn btn-light" href="poster.pdf" download="CQD-dye-treatment-poster.pdf"><svg><use href="#i-dl"/></svg>Download poster (PDF, 1.3 MB)</a>
-    <a class="btn btn-ghost" href="#data"><svg><use href="#i-down"/></svg>Data</a>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <img class="logo" src="img/logo.png" alt="John Monash Science School">
+      <h1>Carbon Quantum Dots in UV/H<sub>2</sub>O<sub>2</sub> Dye Treatment</h1>
+      <p class="rq">How does adding CQDs or N-CQDs affect the breakdown of methylene blue by H<sub>2</sub>O<sub>2</sub> and UV light?</p>
+      <p class="meta">Seara Ng, Tian Yu &amp; Jun Qi Lee · Australian Science Fair</p>
+      <div class="ctas">
+        <a class="btn btn-cta" href="poster.pdf" download="CQD-dye-treatment-poster.pdf"><svg><use href="#i-dl"/></svg>Download poster (PDF, 1.3 MB)</a>
+        <a class="btn btn-ghost" href="#data"><svg><use href="#i-down"/></svg>Data</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-dot">
+        <video src="img/cqd-hero.mp4" poster="img/cqd-hero.jpg" width="640" height="640" muted loop playsinline preload="auto"
+          disablepictureinpicture data-autoplay
+          aria-label="Animation: the outer shell of a carbon quantum dot breaks away to reveal its honeycomb carbon core, then reassembles"></video>
+      </div>
+      <a class="explore" href="#model">Explore it in 3D &rarr;</a>
+    </div>
   </div>
 </header>
 
@@ -270,6 +437,24 @@
 </nav>
 
 <main id="main">
+
+  <div class="result" role="region" aria-labelledby="result-label">
+    <p class="kicker" id="result-label">The surprising result</p>
+    <div class="result-stats">
+      <div class="stat stat-1" role="group" aria-label="51% of the dye removed by H2O2 and UV alone in 30 minutes">
+        <span class="big" aria-hidden="true"><span data-count="51">51</span>%</span>
+        <span class="cap" aria-hidden="true">of the dye removed by H₂O₂ + UV alone in 30 min</span>
+        <div class="rbar" aria-hidden="true"><i></i></div>
+      </div>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
+      <div class="stat stat-2" role="group" aria-label="10 to 12% removed once plain CQDs were added">
+        <span class="big" aria-hidden="true"><span data-count="10">10</span>&ndash;<span data-count="12">12</span>%</span>
+        <span class="cap" aria-hidden="true">removed once plain CQDs were added</span>
+        <div class="rbar" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+    <p class="ctx">We expected CQDs to speed the breakdown up. Under our conditions they seem to have slowed it. <a href="#data">See the data &rarr;</a></p>
+  </div>
 
   <!-- 1 OVERVIEW -->
   <section id="poster">
@@ -304,44 +489,70 @@
     <p class="lede">Detailed steps + observations</p>
     <div class="timeline">
       <div class="tl-step">
-        <div class="tl-media"><div class="placeholder"><div><strong>Photo: microwaving the precursor</strong>citric acid + water, 8 min</div></div></div>
+        <span class="tl-dot" aria-hidden="true">1</span>
+        <div class="tl-media">
+          <!-- TODO: replace with a photo of the beaker in the microwave when available -->
+          <div class="method" role="img" aria-label="Illustration of a beaker in a microwave. Recipe: 2 grams citric acid, 20 millilitres water, microwave for 8 minutes.">
+            <svg viewBox="0 0 160 100" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="6" y="10" width="148" height="80" rx="8"/>
+              <rect x="14" y="18" width="100" height="64" rx="4"/>
+              <line x1="124" y1="24" x2="124" y2="76"/>
+              <circle cx="139" cy="32" r="5"/>
+              <circle cx="139" cy="52" r="5"/>
+              <line x1="134" y1="70" x2="144" y2="70"/>
+              <path d="M54 34 V42 L46 74 Q45 78 49 78 H79 Q83 78 82 74 L74 42 V34 M51 34 H77"/>
+              <path d="M49 62 H79 L81.6 73 Q82.6 76.8 79 76.8 H49 Q45.4 76.8 46.4 73 Z" fill="var(--dot, #f0913a)" stroke="var(--dot, #f0913a)"/>
+            </svg>
+            <ul>
+              <li><b>2 g</b> citric acid</li>
+              <li><b>20 mL</b> water</li>
+              <li>Microwave · <b>8 min</b></li>
+            </ul>
+          </div>
+        </div>
         <div class="tl-body">
-          <h3><span class="tl-num">1</span>Making the carbon dots</h3>
+          <h3><span class="vh">Step 1: </span>Making the carbon dots</h3>
           <p>2 g citric acid dissolved in 20 mL water, then microwaved for 8 minutes.</p>
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">2</span>
         <div class="tl-media"><img class="zoom" src="img/cqd-solutions.jpg" alt="Dark N-CQD solution beside yellow CQD solution"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">2</span>The nitrogen-doped batch</h3>
+          <h3><span class="vh">Step 2: </span>The nitrogen-doped batch</h3>
           <p>Same recipe plus 4 g urea, microwaved in 30-second bursts for 3 minutes. The result (left) was much darker than plain CQDs (right).</p>
         </div>
       </div>
-      <div class="tl-step">
+      <div class="tl-step spot">
+        <span class="tl-dot" aria-hidden="true">3</span>
         <div class="tl-media"><img class="zoom" src="img/fluorescence.jpg" alt="Beakers glowing bright green under UV light"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">3</span>Checking they glow</h3>
-          <p>Under a UV torch the samples fluoresced bright green, a sign that carbon dots had formed.</p>
+          <h3><span class="vh">Step 3: </span>Checking they glow</h3>
+          <p>Under a UV torch the samples fluoresced bright green, a sign that carbon dots had formed. Carbon dots absorb UV light and re-emit it as visible green light.</p>
+          <!-- TODO: add a "UV off / UV on" comparison slider here if a normal-light photo of the same beakers is taken -->
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">4</span>
         <div class="tl-media"><img class="zoom" src="img/standard-solution.jpg" loading="lazy" alt="Labelled beakers of methylene blue solution in the UV box"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">4</span>Dosing the dye</h3>
+          <h3><span class="vh">Step 4: </span>Dosing the dye</h3>
           <p>50 mL of 10 ppm methylene blue per beaker, with 1 mL H₂O₂ and 0–3 mL of CQD or N-CQD solution.</p>
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">5</span>
         <div class="tl-media"><img class="zoom" src="img/empty-dark-box.jpg" loading="lazy" alt="The cardboard dark box used for the 30-minute UV exposure, with the UV torch beside it"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">5</span>30 minutes under UV</h3>
+          <h3><span class="vh">Step 5: </span>30 minutes under UV</h3>
           <p>Each beaker sat under a handheld UV torch inside a closed dark box for 30 minutes.</p>
         </div>
       </div>
       <div class="tl-step">
+        <span class="tl-dot" aria-hidden="true">6</span>
         <div class="tl-media"><img class="zoom" src="img/ncqd-after-uv.jpg" loading="lazy" alt="Three N-CQD beakers, numbered 1 to 3, after 30 minutes under UV"></div>
         <div class="tl-body">
-          <h3><span class="tl-num">6</span>Measuring absorbance</h3>
+          <h3><span class="vh">Step 6: </span>Measuring absorbance</h3>
           <p>A colorimeter read absorbance on six colour channels from 450 to 650 nm. Methylene blue shows up best on the 650 nm (red) channel, closest to its 664 nm peak (see the <a href="#data" data-tab="fingerprint">Absorbance spectrum</a> chart).</p>
         </div>
       </div>
@@ -378,6 +589,7 @@
   <!-- 4 DATA EXPLORER -->
   <section id="data">
     <div class="sh"><span class="hex">4</span><h2>Data</h2></div>
+    <!-- TODO: before/after dye slider once matched photos exist -->
     <div class="stack" style="margin-top:16px">
       <div class="card">
         <div class="tabs" role="tablist" aria-label="Charts">
@@ -487,7 +699,7 @@
     <p class="from-poster">Tap an image to enlarge.</p>
     <div class="lit">
       <figure class="card wide">
-        <p class="tech">TEM · Transmission electron microscopy</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-tem"/></svg></span>TEM · Transmission electron microscopy</p>
         <h3>Size and shape of the dots</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig2-tem.jpg" width="1575" height="1600" loading="lazy" alt="Transmission electron microscope images of single Cu-, Fe-, Mg- and Zn-doped carbon dots with 20 nm scale bars, a row of larger aggregated clusters, and four size histograms with averages from 10.2 to 15.0 nm">
         <figcaption>
@@ -496,7 +708,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">FTIR · Fourier-transform infrared spectroscopy</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-ftir"/></svg></span>FTIR · Fourier-transform infrared spectroscopy</p>
         <h3>Chemical groups on the surface</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig3-ftir.png" width="1391" height="1600" loading="lazy" alt="Two FTIR transmittance plots: four stacked spectra of Fe-, Cu-, Zn- and Mg-doped carbon dots with dips labelled –OH/–NH, C=O, C–N and C–O, and a low-wavenumber close-up showing one metal–oxygen dip per sample between 549 and 592 cm⁻¹">
         <figcaption>
@@ -505,7 +717,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">XPS · X-ray photoelectron spectroscopy</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-xps"/></svg></span>XPS · X-ray photoelectron spectroscopy</p>
         <h3>How the carbon atoms are bonded</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig6-xps-c1s.png" width="1600" height="1101" loading="lazy" alt="Four XPS C 1s spectra for Cu-, Fe-, Mg- and Zn-doped carbon dots, each with a tall C–C peak near 285 eV and smaller fitted peaks labelled C–N/C–O–C and C=O">
         <figcaption>
@@ -514,7 +726,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">Zeta potential · Surface charge measurement</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-zeta"/></svg></span>Zeta potential · Surface charge measurement</p>
         <h3>Surface charge in water</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig9-zeta.png" width="1600" height="890" loading="lazy" alt="Bar chart of zeta potential for five kinds of carbon dots, all negative: Fe −25.4, Cu −21.4, Zn −28.6, Mg −30.7 and N-doped −15.7 mV, with error bars">
         <figcaption>
@@ -523,7 +735,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">UV–Vis absorption · Diagram, not instrument data</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-uvvis"/></svg></span>UV–Vis absorption · Diagram, not instrument data</p>
         <h3>Reading a UV–Vis absorption spectrum</h3>
         <img class="zoom" src="img/graphs/chen2025s-fig2-transitions.jpg" width="1600" height="741" loading="lazy" alt="Diagram of an undoped carbon dot in the centre with a metal-doped dot on each side, energy-level arrows beneath each, and arrows marked blue shift with increased energy gap and red shift with decreased energy gap">
         <figcaption>
@@ -653,6 +865,25 @@ const nRemoved = 100 * (1 - nA / nB), nRemovedSd = 100 * sd(DATA.ncqd.after) / n
   document.querySelector('#raw tbody').innerHTML = rows.join('');
 })();
 
+/* ===== results count-up ===== */
+(() => {
+  const els = document.querySelectorAll('.result [data-count]');
+  if (!els.length || matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    io.disconnect();
+    const t0 = performance.now(), dur = 1100;
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+      els.forEach(el => { el.textContent = Math.round(+el.dataset.count * k); });
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, { threshold: 0.5 });
+  els.forEach(el => { el.textContent = '0'; });   // HTML holds the final numbers for no-JS / reduced motion
+  io.observe(document.querySelector('.result'));
+})();
+
 /* ===== lightbox ===== */
 const lb = document.getElementById('lightbox');
 document.querySelectorAll('img.zoom').forEach(img => {
@@ -675,7 +906,7 @@ const navObs = new IntersectionObserver(es => es.forEach(e => {
   links.forEach(a => {
     const on = a.getAttribute('href') === '#' + e.target.id;
     a.classList.toggle('active', on);
-    if (on) navList.scrollTo({ left: a.parentElement.offsetLeft - (navList.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+    if (on) navList.scrollTo({ left: a.parentElement.offsetLeft - (navList.clientWidth - a.offsetWidth) / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   });
 }), { rootMargin: '-40% 0px -55% 0px' });
 document.querySelectorAll('main section').forEach(s => navObs.observe(s));
@@ -683,10 +914,26 @@ document.querySelectorAll('main section').forEach(s => navObs.observe(s));
 /* ===== charts ===== */
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const made = {}, builders = {};
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (window.Chart) {
   Chart.defaults.font.family = 'Roboto, system-ui, sans-serif';
   Chart.defaults.color = css('--ink-3');
   Chart.defaults.maintainAspectRatio = false;
+  if (reduceMotion) Chart.defaults.animation = false;
+  else {
+    Chart.defaults.animation.duration = 800;
+    Chart.defaults.animation.easing = 'easeOutQuart';
+    // once the bars/points have grown, fade the value labels, whiskers and dots in
+    Chart.defaults.animation.onComplete = ({ chart: ch }) => {
+      if (ch.$fade) return;
+      ch.$fade = true;
+      const t0 = performance.now();
+      const step = now => { ch.$a = Math.min(1, (now - t0) / 250); ch.draw(); if (ch.$a < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    };
+  }
+  const labelAlpha = ch => reduceMotion ? 1 : (ch.$a || 0);
+  const gated = fn => ch => { const a = labelAlpha(ch); if (!a) return; ch.ctx.save(); ch.ctx.globalAlpha = a; fn(ch); ch.ctx.restore(); };
   const grid = { color: '#e6ecf5' };
   const tip = { backgroundColor: '#1b2433', padding: 10, cornerRadius: 8, titleFont: { weight: '700' } };
   const legend = { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8, color: css('--ink-2') } };
@@ -695,12 +942,107 @@ if (window.Chart) {
   const dot = (ctx, x, y, fill) => { ctx.save(); ctx.beginPath(); ctx.arc(x, y, 4.5, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke(); ctx.restore(); };
   const whisker = (ctx, x, y0, y1) => { ctx.save(); ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.moveTo(x - 6, y0); ctx.lineTo(x + 6, y0); ctx.moveTo(x - 6, y1); ctx.lineTo(x + 6, y1); ctx.stroke(); ctx.restore(); };
 
+  /* ----- chart to beaker photo link ----- */
+  const G = {
+    controls: { src: 'img/graphs/controls.png', alt: 'SPARKvue graph of controls 1 to 3, flat lines between 0.14 and 0.20', cap: 'SPARKvue graph: controls #1–3 (650 nm)' },
+    cqd: { src: 'img/graphs/cqd-amount.png', alt: 'SPARKvue graph of CQD conc 1 to 3, flat lines near 0.30', cap: 'SPARKvue graph: CQD conc #1–3, 1, 2 and 3 mL (650 nm)' },
+    hp: { src: 'img/graphs/h2o2-6pct-cqd.png', alt: 'SPARKvue graph of HP conc 1 to 3, flat lines near 0.36', cap: 'SPARKvue graph: HP conc #1–3 (650 nm)' },
+    ncqd: { src: 'img/graphs/ncqd-14oct.png', alt: 'SPARKvue graph of three N-CQD beakers after UV, between 1.8 and 2.05', cap: 'SPARKvue graph: N-CQD beakers after UV, 14 Oct (450 nm)' },
+    ncqdAmt: { src: 'img/graphs/ncqd-amount-15oct.png', alt: 'SPARKvue graph of 1, 2 and 3 mL N-CQD before and after UV, between 2.1 and 2.95', cap: 'SPARKvue graph: N-CQD 1–3 mL before and after UV, 15 Oct (450 nm)' }
+  };
+  const uvBox = tag => ({ src: 'img/standard-solution.jpg', alt: 'Methylene-blue beakers in the UV box, each with a label', cap: `Beakers in the UV box; this trial's are labelled '${tag}'` });
+  const f3 = v => v.toFixed(3);
+  const pct = (v, s) => `${v.toFixed(1)}%${s == null ? '' : ` ± ${s.toFixed(1)} (SD)`}`;
+  const signed = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(3);
+  const trialItem = t => ({
+    label: t.label, title: `Trial ${t.id}: ${t.label}`,
+    photos: t.id === 'A' ? [uvBox('control'), G.controls] : t.id === 'C' ? [uvBox('HP conc'), G.hp] : [G.cqd],
+    rows: [['Condition', t.cond], ['Date', t.date], ['Absorbance at 650 nm after UV', t.reps.map(f3).join(', ') + (t.reps.length > 1 ? '' : ' (1 beaker)')],
+           ['Mean', f3(t.mean)], ['Dye removed', pct(t.removed, t.removedSd)]]
+  });
+  const ncqdPhotos = [{ src: 'img/ncqd-after-uv.jpg', alt: 'Three N-CQD beakers numbered 1 to 3 after 30 minutes of UV', cap: 'Beakers numbered 1–3 after 30 min UV (14 Oct)' }, G.ncqd];
+  const ncqdCond = 'MB + 3% H₂O₂ + 1 mL N-CQD';
+  const LINKS = {
+    removed: { noun: 'bar', items: DATA.trials.map(trialItem) },
+    fig2: { noun: 'bar', items: DATA.trials.map(trialItem) },
+    ncqd: { noun: 'bar', items: [0, 1, 2, 3].map(i => {
+      const b = i < 3 ? DATA.ncqd.before[i] : nB, a = i < 3 ? DATA.ncqd.after[i] : nA, name = i < 3 ? `Repeat ${i + 1}` : 'Mean of 3 repeats';
+      return { label: i < 3 ? name : 'Mean', title: `Trial D: ${name}`, photos: ncqdPhotos,
+        rows: [['Condition', ncqdCond], ['Date', '14 Oct'], ['Absorbance at 650 nm', `${f3(b)} before UV, ${f3(a)} after`], ['Change', signed(a - b)],
+               ['Dye removed', i < 3 ? pct(100 * (1 - a / b)) : pct(nRemoved, nRemovedSd)]] };
+    }) },
+    fig3: { noun: 'point', items: DATA.ncqdAmount.map(e => ({
+      label: `${e.vol} mL N-CQD`, title: `Trial E: ${e.vol} mL N-CQD`, photos: [G.ncqdAmt],
+      rows: [['Condition', `MB + ${e.vol} mL N-CQD`], ['Date', '15 Oct'], ['Absorbance at 450 nm', `${f3(e.a450)} before UV, ${f3(e.after450)} after`],
+             ['Change', signed(e.after450 - e.a450)], ['Absorbance at 650 nm', `${f3(e.a650)} before UV`]],
+      note: 'After-UV value is read off the colorimeter screenshot (±0.01). No beaker photo for this trial.' })) }
+  };
+  const accent = () => css('--dot') || '#f0913a';
+  const bindZoom = img => {
+    const open = () => { lb.querySelector('img').src = img.src; lb.querySelector('img').alt = img.alt; lb.showModal(); };
+    img.tabIndex = 0; img.setAttribute('role', 'button');
+    img.addEventListener('click', open);
+    img.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  };
+  const highlight = (ch, i) => {
+    ch.data.datasets.forEach(ds => {
+      if (ch.config.type === 'bar') { ds.borderWidth = ds.data.map((_, j) => j === i ? 3 : 0); ds.borderColor = accent(); }
+    });
+    ch.$sel = i;   // line charts: a ring is drawn round the selected points (see the 'sel' plugin)
+    ch.update('none');
+  };
+  const detailBox = id => document.querySelector(`.panel[data-panel="${id}"] .beaker-detail`);
+  const pickBtns = id => [...document.querySelectorAll(`.panel[data-panel="${id}"] .pick button`)];
+  function selectBeaker(id, i) {
+    const L = LINKS[id], it = L.items[i], box = detailBox(id);
+    L.sel = i;
+    box.innerHTML = `<div class="bd"><button type="button" class="bd-close" aria-label="Close beaker detail">×</button>
+      <div class="bd-photos">${it.photos.map(p => `<figure><img class="zoom" src="${p.src}" alt="${p.alt}" loading="lazy"><figcaption>${p.cap}</figcaption></figure>`).join('')}</div>
+      <div class="bd-read"><h4>${it.title}</h4><dl>${it.rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>${it.note ? `<p class="bd-note">${it.note}</p>` : ''}</div></div>`;
+    box.querySelectorAll('img.zoom').forEach(bindZoom);
+    box.querySelector('.bd-close').addEventListener('click', () => closeBeaker(id, true));
+    pickBtns(id).forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+    if (made[id]) highlight(made[id], i);
+  }
+  function closeBeaker(id, refocus) {
+    const L = LINKS[id], btns = pickBtns(id);
+    L.sel = -1;
+    detailBox(id).innerHTML = '';
+    btns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+    if (made[id]) highlight(made[id], -1);
+    if (refocus && btns.length) (btns[L.last] || btns[0]).focus();
+  }
+  Object.keys(LINKS).forEach(id => {
+    const L = LINKS[id], panel = document.querySelector(`.panel[data-panel="${id}"]`), cb = panel.querySelector('.chartbox');
+    L.sel = -1; L.last = 0;
+    const hint = document.createElement('p');
+    hint.className = 'tip-hint'; hint.textContent = `Tip: click a ${L.noun} to see that beaker's photo and readings.`;
+    const pick = document.createElement('div');
+    pick.className = 'pick'; pick.setAttribute('role', 'group'); pick.setAttribute('aria-label', 'Show beaker photo and readings');
+    L.items.forEach((it, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = it.label; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => { L.last = i; selectBeaker(id, i); });
+      pick.appendChild(b);
+    });
+    const detail = document.createElement('div');
+    detail.className = 'beaker-detail'; detail.setAttribute('aria-live', 'polite');
+    cb.before(hint); cb.after(pick); panel.appendChild(detail);
+  });
+  const hit = (ch, e) => ch.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+  const linkOpts = id => ({
+    onHover: (e, _, ch) => { e.native.target.style.cursor = hit(ch, e).length ? 'pointer' : 'default'; },
+    onClick: (e, _, ch) => { const h = hit(ch, e); if (h.length) { LINKS[id].last = h[0].index; selectBeaker(id, h[0].index); } }
+  });
+
   builders.removed = () => {
     const T = DATA.trials;
     return new Chart(document.getElementById('c-removed'), {
       type: 'bar',
       data: { labels: T.map(t => t.label), datasets: [{ data: T.map(t => t.removed), backgroundColor: T.map(t => t.ctrl ? css('--ctrl') : css('--cqd')), ...bar }] },
       options: {
+        ...linkOpts('removed'),
+        animations: { y: { from: ctx => ctx.chart.scales.y.getPixelForValue(0) } },
         plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
           label: c => `${c.parsed.y.toFixed(1)}% of dye removed`,
           afterLabel: c => { const t = T[c.dataIndex]; return t.removedSd == null ? '1 beaker' : `± ${t.removedSd.toFixed(1)}% (SD, 3 beakers)`; }
@@ -710,7 +1052,7 @@ if (window.Chart) {
           x: { grid: { display: false } }
         }
       },
-      plugins: [{ id: 'lbl', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'lbl', afterDatasetsDraw: gated(ch => {
         const { ctx, scales: { y } } = ch;
         ch.getDatasetMeta(0).data.forEach((b, i) => {
           const t = T[i]; let top = Math.min(b.y, b.base);
@@ -720,7 +1062,7 @@ if (window.Chart) {
           }
           text(ctx, `${Math.round(t.removed)}%`, b.x, top - 8, 'center', 700);
         });
-      }}]
+      })}]
     });
   };
 
@@ -764,13 +1106,14 @@ if (window.Chart) {
         { label: 'After 30 min UV', data: a, backgroundColor: css('--ncqd'), ...bar }
       ]},
       options: {
+        ...linkOpts('ncqd'),
         datasets: { bar: { categoryPercentage: .7, barPercentage: .9 } },
         plugins: { legend, tooltip: { ...tip, callbacks: { label: c => `${c.dataset.label}: ${c.parsed.y.toFixed(3)}` } } },
         scales: { y: { beginAtZero: true, max: 1, grid, title: { display: true, text: 'Absorbance at 650 nm' }, ticks: { stepSize: 0.2 } }, x: { grid: { display: false } } }
       },
-      plugins: [{ id: 'lbl', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'lbl', afterDatasetsDraw: gated(ch => {
         [b, a].forEach((d, k) => ch.getDatasetMeta(k).data.forEach((r, i) => text(ch.ctx, d[i].toFixed(2), r.x, r.y - 6)));
-      }}]
+      })}]
     });
   };
 
@@ -808,7 +1151,7 @@ if (window.Chart) {
   };
 
   builders.fig3 = () => {
-    const E = DATA.ncqdAmount, pts = c => ({ borderColor: c, backgroundColor: c, borderWidth: 2, pointRadius: 5, pointHoverRadius: 7, pointBorderColor: '#fff', pointBorderWidth: 2 });
+    const E = DATA.ncqdAmount, pts = c => ({ borderColor: c, backgroundColor: c, borderWidth: 2, pointRadius: 5, pointHoverRadius: 7, pointBorderColor: '#fff', pointBorderWidth: 2, hitRadius: 12 });
     return new Chart(document.getElementById('c-fig3'), {
       type: 'line',
       data: { labels: E.map(e => e.vol + ' mL'), datasets: [
@@ -816,6 +1159,7 @@ if (window.Chart) {
         { label: 'After 30 min UV', data: E.map(e => e.after450), ...pts(css('--ncqd')) }
       ]},
       options: {
+        ...linkOpts('fig3'),
         interaction: { mode: 'index', intersect: false },
         layout: { padding: { right: 70 } },
         plugins: { legend, tooltip: { ...tip, callbacks: {
@@ -825,9 +1169,15 @@ if (window.Chart) {
         }}},
         scales: { y: { min: 2.0, max: 3.1, grid, title: { display: true, text: 'Absorbance at 450 nm' }, ticks: { stepSize: 0.2 } }, x: { grid: { display: false }, title: { display: true, text: 'N-CQD solution added' } } }
       },
-      plugins: [{ id: 'end', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'sel', afterDatasetsDraw(ch) {
+        if (!(ch.$sel >= 0)) return;
+        ch.data.datasets.forEach((_, k) => {
+          const p = ch.getDatasetMeta(k).data[ch.$sel];
+          ch.ctx.save(); ch.ctx.beginPath(); ch.ctx.arc(p.x, p.y, 8, 0, Math.PI * 2); ch.ctx.lineWidth = 3; ch.ctx.strokeStyle = accent(); ch.ctx.stroke(); ch.ctx.restore();
+        });
+      }}, { id: 'end', afterDatasetsDraw: gated(ch => {
         ch.data.datasets.forEach((ds, i) => { const pt = ch.getDatasetMeta(i).data.at(-1); text(ch.ctx, i ? 'After UV' : 'Before UV', pt.x + 10, pt.y + (i ? 14 : -4), 'left', 700); });
-      }}]
+      })}]
     });
   };
 
@@ -837,34 +1187,66 @@ if (window.Chart) {
       type: 'bar',
       data: { labels: T.map(t => t.label), datasets: [{ data: T.map(t => t.mean), backgroundColor: T.map(t => t.ctrl ? css('--ctrl') : css('--cqd')), ...bar }] },
       options: {
+        ...linkOpts('fig2'),
         plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
           label: c => `Mean absorbance ${c.parsed.y.toFixed(3)}`,
           afterLabel: c => { const r = T[c.dataIndex].reps; return r.length > 1 ? `Beakers: ${r.map(v => v.toFixed(3)).join(', ')}` : '1 beaker'; }
         }}},
         scales: { y: { beginAtZero: true, max: 0.45, grid, title: { display: true, text: 'Absorbance at 650 nm' }, ticks: { stepSize: 0.1 } }, x: { grid: { display: false } } }
       },
-      plugins: [{ id: 'dots', afterDatasetsDraw(ch) {
+      plugins: [{ id: 'dots', afterDatasetsDraw: gated(ch => {
         const { ctx, scales: { y } } = ch;
         ch.getDatasetMeta(0).data.forEach((b, i) => {
           const r = T[i].reps; let top = b.y;
           if (r.length > 1) r.forEach((v, j) => { const py = y.getPixelForValue(v); dot(ctx, b.x + (j - 1) * 11, py, css('--ink')); top = Math.min(top, py - 4); });
           text(ctx, T[i].mean.toFixed(3), b.x, top - 8);
         });
-      }}]
+      })}]
     });
   };
 }
 
 /* ===== tabs ===== */
 const tabs = [...document.querySelectorAll('.tabs button')];
+let activeTab = 'removed', chartsLive = false;   // charts are built only once the chart card is on screen, so the growth animation is seen
 function showTab(id) {
+  activeTab = id;
   tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
   document.querySelectorAll('.panel').forEach(p => p.hidden = p.dataset.panel !== id);
-  if (builders[id] && !made[id]) made[id] = builders[id]();
+  if (chartsLive && builders[id] && !made[id]) made[id] = builders[id]();
 }
-tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
-document.querySelectorAll('a[data-tab]').forEach(a => a.addEventListener('click', () => showTab(a.dataset.tab)));
+tabs.forEach(t => t.addEventListener('click', () => { chartsLive = true; showTab(t.dataset.tab); }));
+document.querySelectorAll('a[data-tab]').forEach(a => a.addEventListener('click', () => { chartsLive = true; showTab(a.dataset.tab); }));
 showTab('removed');
+(() => {
+  const go = () => { chartsLive = true; showTab(activeTab); };
+  const card = document.querySelector('#data .panel:not([hidden]) .chartbox');
+  if (!('IntersectionObserver' in window) || !card) { go(); return; }
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); go(); } }, { threshold: 0.3 });
+  io.observe(card);
+})();
+
+// fade cards in as they scroll into view (only hidden once JS has added html.motion)
+(() => {
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+  const els = document.querySelectorAll('.card, .glance > div, .tl-step, .lit figure, .result');
+  const done = el => setTimeout(() => { el.classList.remove('reveal-ready'); el.style.transitionDelay = ''; }, 800);
+  const io = new IntersectionObserver(es => {
+    let n = 0;
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      e.target.style.transitionDelay = Math.min(n++, 2) * 40 + 'ms';
+      e.target.classList.add('in');
+      done(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => {
+    el.classList.add('reveal-ready');
+    if (el.getBoundingClientRect().top < innerHeight) { el.classList.add('in'); done(el); } else io.observe(el);
+  });
+  document.documentElement.classList.add('motion');
+})();
 
 // 3D section: play the looping animation only while it is on screen
 (() => {
