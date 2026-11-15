@@ -11,11 +11,14 @@
 <meta property="og:title" content="CQDs in UV/H₂O₂ Dye Treatment">
 <meta property="og:description" content="Lab photos, every data point, extra charts, a 3D model and published microscope images behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
 <meta property="og:url" content="https://seara1129.github.io/cqd-dye-treatment/">
-<meta property="og:image" content="https://seara1129.github.io/cqd-dye-treatment/img/poster-thumb.jpg">
-<meta property="og:image:width" content="795">
-<meta property="og:image:height" content="1124">
-<meta property="og:image:alt" content="Thumbnail of the research poster on carbon quantum dots in UV/H₂O₂ dye treatment">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://seara1129.github.io/cqd-dye-treatment/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glowing carbon quantum dot beside the title Carbon Quantum Dots in UV/H₂O₂ Dye Treatment">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://seara1129.github.io/cqd-dye-treatment/img/share.jpg">
+<meta name="twitter:image:alt" content="Glowing carbon quantum dot beside the title Carbon Quantum Dots in UV/H₂O₂ Dye Treatment">
+<meta name="theme-color" content="#2b4a8b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -277,6 +280,14 @@
   .lit .wide img { max-width: 760px; margin: 0 auto; }
   .lit .credit { margin: 8px 0 0; font-size: 13px; color: var(--ink-3); }
   @media (max-width: 860px) { .lit { grid-template-columns: 1fr; } }
+  .lit .tech { display: flex; align-items: center; gap: 10px; }
+  .tech-ic { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 10px; background: #e3ecfa; color: var(--navy); }
+  .tech-ic svg { width: 20px; height: 20px; flex: none; }
+  .card { transition: transform .2s ease, box-shadow .2s ease; }
+  @media (hover: hover) { .card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(20,40,80,.12); } }
+  .lit figure img { transition: transform .35s ease; }
+  @media (hover: hover) { .lit figure:hover img { transform: scale(1.025); } }
+  @media (prefers-reduced-motion: reduce) { .card, .lit figure img { transition: none; } .card:hover { transform: none; } .lit figure:hover img { transform: none; } }
 
   .tablewrap { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; font-size: 15px; }
@@ -338,6 +349,11 @@
   <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-tem" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5 10.5 3l3.6 8.2-3 1.3ZM12.5 11.5c2.4.2 4.5 2 4.5 4.8v2.2M5.5 18.5h13M10.5 13.8v4.7M8 21h10"/></g></symbol>
+  <symbol id="i-ftir" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 7h3.5l1.5 5 1.5-5h3l1.5 8 1.5-8h3l1 3 1-3H22"/></symbol>
+  <symbol id="i-xps" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="2"/><ellipse cx="10" cy="12" rx="8" ry="3.5" transform="rotate(-25 10 12)"/><circle cx="12.4" cy="7.6" r="1"/><path d="M14.5 5.5 20.5 2.5M16.5 2.5h4v4"/></g></symbol>
+  <symbol id="i-zeta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M3.5 5.5h2.5M18 5.5h2.5M3.5 18.5h2.5M18 18.5h2.5"/></g></symbol>
+  <symbol id="i-uvvis" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 15 16H3Z"/><path d="M1.5 10.5H6M12 10.5l9-4M12 10.5h9M12 10.5l9 4"/></g></symbol>
 </svg>
 
 <header class="hero">
@@ -641,7 +657,7 @@
     <p class="from-poster">Tap an image to enlarge.</p>
     <div class="lit">
       <figure class="card wide">
-        <p class="tech">TEM · Transmission electron microscopy</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-tem"/></svg></span>TEM · Transmission electron microscopy</p>
         <h3>Size and shape of the dots</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig2-tem.jpg" width="1575" height="1600" loading="lazy" alt="Transmission electron microscope images of single Cu-, Fe-, Mg- and Zn-doped carbon dots with 20 nm scale bars, a row of larger aggregated clusters, and four size histograms with averages from 10.2 to 15.0 nm">
         <figcaption>
@@ -650,7 +666,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">FTIR · Fourier-transform infrared spectroscopy</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-ftir"/></svg></span>FTIR · Fourier-transform infrared spectroscopy</p>
         <h3>Chemical groups on the surface</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig3-ftir.png" width="1391" height="1600" loading="lazy" alt="Two FTIR transmittance plots: four stacked spectra of Fe-, Cu-, Zn- and Mg-doped carbon dots with dips labelled –OH/–NH, C=O, C–N and C–O, and a low-wavenumber close-up showing one metal–oxygen dip per sample between 549 and 592 cm⁻¹">
         <figcaption>
@@ -659,7 +675,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">XPS · X-ray photoelectron spectroscopy</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-xps"/></svg></span>XPS · X-ray photoelectron spectroscopy</p>
         <h3>How the carbon atoms are bonded</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig6-xps-c1s.png" width="1600" height="1101" loading="lazy" alt="Four XPS C 1s spectra for Cu-, Fe-, Mg- and Zn-doped carbon dots, each with a tall C–C peak near 285 eV and smaller fitted peaks labelled C–N/C–O–C and C=O">
         <figcaption>
@@ -668,7 +684,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">Zeta potential · Surface charge measurement</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-zeta"/></svg></span>Zeta potential · Surface charge measurement</p>
         <h3>Surface charge in water</h3>
         <img class="zoom" src="img/graphs/chen2025c-fig9-zeta.png" width="1600" height="890" loading="lazy" alt="Bar chart of zeta potential for five kinds of carbon dots, all negative: Fe −25.4, Cu −21.4, Zn −28.6, Mg −30.7 and N-doped −15.7 mV, with error bars">
         <figcaption>
@@ -677,7 +693,7 @@
         </figcaption>
       </figure>
       <figure class="card">
-        <p class="tech">UV–Vis absorption · Diagram, not instrument data</p>
+        <p class="tech"><span class="tech-ic" aria-hidden="true"><svg><use href="#i-uvvis"/></svg></span>UV–Vis absorption · Diagram, not instrument data</p>
         <h3>Reading a UV–Vis absorption spectrum</h3>
         <img class="zoom" src="img/graphs/chen2025s-fig2-transitions.jpg" width="1600" height="741" loading="lazy" alt="Diagram of an undoped carbon dot in the centre with a metal-doped dot on each side, energy-level arrows beneath each, and arrows marked blue shift with increased energy gap and red shift with decreased energy gap">
         <figcaption>
