@@ -4,4 +4,4 @@ Companion website for our science fair poster: lab photos, every colorimeter rea
 
 **Live site:** https://seara1129.github.io/cqd-dye-treatment/
 
-Seara Ng, Tian Yu & Jun Qi Lee · John Monash Science School
+Seara Ng, Tian Yi Yu & Jun Qi Lee · John Monash Science School
