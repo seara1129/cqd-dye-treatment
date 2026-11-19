@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CQDs in UV/H₂O₂ Dye Treatment</title>
-<meta name="description" content="Lab photos, every data point, extra charts, a 3D model and published microscope images behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
+<meta name="description" content="Lab photos, every data point, extra charts, 3D animations, published microscope images and future uses behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CQDs in UV/H₂O₂ Dye Treatment">
-<meta property="og:description" content="Lab photos, every data point, extra charts, a 3D model and published microscope images behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
+<meta property="og:description" content="Lab photos, every data point, extra charts, 3D animations, published microscope images and future uses behind the poster: do carbon quantum dots (carbon dots, CQDs) speed up UV/H₂O₂ breakdown of methylene blue?">
 <meta property="og:url" content="https://seara1129.github.io/cqd-dye-treatment/">
 <meta property="og:image" content="https://seara1129.github.io/cqd-dye-treatment/img/share.jpg">
 <meta property="og:image:width" content="1200">
@@ -123,26 +123,6 @@
     .hero .ctas { justify-content: flex-start; }
   }
 
-  /* ---------- results callout ---------- */
-  .result { margin-top: 28px; padding: 22px 20px 20px; background: var(--card); border-radius: var(--radius); box-shadow: 0 4px 18px rgba(20,40,80,.1); }
-  .result .kicker { margin: 0 0 14px; font: 700 13px Roboto, sans-serif; letter-spacing: .09em; text-transform: uppercase; color: var(--dot-ink); }
-  .result-stats { display: grid; grid-template-columns: 1fr; gap: 14px; align-items: center; }
-  .result .stat { margin: 0; }
-  .result .big { display: block; font: 700 clamp(44px, 7vw, 72px)/1 "Roboto Condensed", sans-serif; font-variant-numeric: tabular-nums; }
-  .result .stat-1 .big { color: var(--navy); }
-  .result .stat-2 .big { color: var(--dot-ink); }
-  .result .cap { display: block; margin-top: 6px; color: var(--ink-2); font-size: 15px; line-height: 1.4; }
-  .result .rbar { height: 8px; margin-top: 10px; border-radius: 999px; background: #eef2f9; overflow: hidden; }
-  .result .rbar i { display: block; height: 100%; border-radius: 999px; }
-  .result .stat-1 .rbar i { width: 51%; background: var(--navy); }
-  .result .stat-2 .rbar i { width: 12%; background: var(--dot); }
-  .result .arrow { display: none; font: 700 40px "Roboto Condensed", sans-serif; color: var(--ink-3); }
-  .result .ctx { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink); }
-  @media (min-width: 760px) {
-    .result-stats { grid-template-columns: 1fr auto 1fr; gap: 28px; }
-    .result .arrow { display: block; }
-  }
-
   /* ---------- sticky nav ---------- */
   nav.toc { position: sticky; top: 0; z-index: 10; background: rgba(43,74,139,.97); box-shadow: 0 2px 10px rgba(0,0,0,.12); }
   nav.toc .wrap { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; padding: 0 8px; }
@@ -212,13 +192,6 @@
   .tl-step:nth-child(3)::after { background: var(--glow, #3fdc8a); }
   .tl-step:nth-child(4)::after { background: linear-gradient(var(--glow, #3fdc8a), var(--bar)); }
 
-  /* method card (step 1, no photo yet) */
-  .method { width: 100%; aspect-ratio: 16/10; border-radius: 10px; background: #f3f6fb; border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 12px; }
-  .method svg { width: min(46%, 170px); height: auto; min-height: 0; flex: 0 1 auto; }
-  .method ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
-  .method li { padding: 4px 11px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); font-size: 14px; font-weight: 500; }
-  .method li b { color: var(--dot-ink, #b4530f); font-weight: 700; }
-
   /* spotlight step (glowing beakers) */
   .tl-step.spot { background: var(--deep, #0e1a33); color: #fff; grid-template-columns: 1.5fr 1fr; gap: 28px; padding: 20px; }
   .tl-step.spot h3 { color: var(--glow, #3fdc8a); font-size: 24px; }
@@ -234,7 +207,7 @@
     .tl-step:not(:last-child)::after { left: -26.5px; top: 30px; }
   }
 
-  /* ---------- 3 3D model ---------- */
+  /* ---------- 3 in 3D (diagram + animations) ---------- */
   #model { position: relative; isolation: isolate; margin-top: 40px; padding: 48px 0; color: #fff;
     background: var(--deep); box-shadow: 0 0 0 100vmax var(--deep); clip-path: inset(0 -100vmax); }
   #model::before {
@@ -245,18 +218,15 @@
   #model .sh h2 { background: var(--deep-2); color: #fff; border-left: 4px solid var(--dot); }
   #model .lede { color: #c9d8f3; }
   #model a { color: #fff; }
-  #model a:focus-visible, #model video:focus-visible, #model model-viewer:focus-visible { outline-color: #fff; }
-  .stage3d { position: relative; height: 440px; border-radius: var(--radius); overflow: hidden;
-    background: radial-gradient(circle at 50% 40%, #2c4a86, #101b33 75%); }
-  .stage3d model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: transparent; }
-  .mv-hint { display: grid; place-items: center; height: 100%; color: #dbe6fb; font-size: 15px; }
-  .mv-help { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); padding: 4px 12px; border-radius: 999px;
-    background: rgba(255,255,255,.14); color: #e6eefc; font-size: 13px; white-space: nowrap; pointer-events: none; }
-  @media (max-width: 620px) { .stage3d { height: 320px; } .mv-help { white-space: normal; text-align: center; width: max-content; max-width: 90%; } }
+  #model a:focus-visible, #model video:focus-visible { outline-color: #fff; }
+  .diagram { margin: 0; }
+  .diagram-img { background: #fff; border-radius: 10px; padding: 16px; }
+  .diagram-img img { width: 100%; max-width: 640px; margin: 0 auto; border-radius: 0; }
+  @media (max-width: 620px) { .diagram-img { padding: 6px; } }
   .vids { margin-top: 16px; }
   .vids figure { margin: 0; }
-  .vids .card { background: var(--deep-2); border: 1px solid rgba(255,255,255,.08); box-shadow: none; color: #fff; }
-  .vids figcaption { color: #c9d8f3; }
+  .vids .card, .diagram { background: var(--deep-2); border: 1px solid rgba(255,255,255,.08); box-shadow: none; color: #fff; }
+  .vids figcaption, .diagram figcaption { color: #c9d8f3; }
   .vids video { width: 100%; aspect-ratio: 16/9; display: block; border-radius: 10px; background: #0b1426; }
 
   /* ---------- 4 data explorer ---------- */
@@ -344,7 +314,23 @@
   .shots img { width: 100%; aspect-ratio: 16/10; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
   .shots figcaption { margin-top: 6px; font-size: 13px; }
 
-  /* ---------- 6 contact ---------- */
+  /* ---------- 6 future implementation ---------- */
+  .fut-h { margin: 22px 0 10px; font-size: 22px; color: var(--navy); }
+  .fut { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .fut-research { grid-template-columns: repeat(3, 1fr); }
+  .fut-apps { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 1000px) { .fut-apps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 760px) { .fut-research { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .fut-apps { grid-template-columns: 1fr; } }
+  .fut-research .card { border-top: 4px solid var(--dot); }
+  .fut h4 { margin: 10px 0 4px; font: 700 18px/1.25 "Roboto Condensed", Roboto, sans-serif; }
+  .fut p { margin: 0; color: var(--ink-2); font-size: 15px; }
+  .fut-num { width: 40px; height: 36px; display: grid; place-items: center; background: var(--dot); color: var(--ink);
+    font: 700 18px "Roboto Condensed", sans-serif; clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+  .fut-apps .tech-ic { width: 40px; height: 40px; }
+  .fut-apps .tech-ic svg { width: 22px; height: 22px; }
+
+  /* ---------- 7 contact ---------- */
   .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .person { text-align: center; }
   .avatar { width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(135deg, var(--hero-a), var(--bar)); color: #fff; display: grid; place-items: center; font: 700 32px "Roboto Condensed", sans-serif; margin: 0 auto; border: 4px solid #fff; box-shadow: 0 4px 14px rgba(20,40,80,.15); }
@@ -373,11 +359,11 @@
 
   /* ---------- accessibility ---------- */
   a:focus-visible, button:focus-visible, [role="tab"]:focus-visible, summary:focus-visible,
-  img.zoom:focus-visible, video:focus-visible, model-viewer:focus-visible, nav.toc a.nl:focus-visible {
+  img.zoom:focus-visible, video:focus-visible, nav.toc a.nl:focus-visible {
     outline: 3px solid #1b2f63; outline-offset: 3px;
   }
   header a:focus-visible, header button:focus-visible, nav.toc a:focus-visible, nav.toc button:focus-visible,
-  footer a:focus-visible, footer button:focus-visible, .stage3d model-viewer:focus-visible {
+  footer a:focus-visible, footer button:focus-visible {
     outline-color: #fff; outline-offset: 2px;
   }
   .skip { position: absolute; left: 8px; top: -100px; z-index: 100; padding: 10px 16px; background: #fff; color: #1b2f63; font: 600 15px "Roboto Condensed", sans-serif; border-radius: 6px; text-decoration: none; }
@@ -395,6 +381,10 @@
   <symbol id="i-ftir" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 7h3.5l1.5 5 1.5-5h3l1.5 8 1.5-8h3l1 3 1-3H22"/></symbol>
   <symbol id="i-xps" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="2"/><ellipse cx="10" cy="12" rx="8" ry="3.5" transform="rotate(-25 10 12)"/><circle cx="12.4" cy="7.6" r="1"/><path d="M14.5 5.5 20.5 2.5M16.5 2.5h4v4"/></g></symbol>
   <symbol id="i-zeta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M3.5 5.5h2.5M18 5.5h2.5M3.5 18.5h2.5M18 18.5h2.5"/></g></symbol>
+  <symbol id="i-water" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/><path d="M9 15a3 3 0 0 0 3 3"/></g></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></symbol>
+  <symbol id="i-sense" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><circle cx="10.5" cy="10.5" r="2" fill="currentColor"/><path d="m15.5 15.5 5.5 5.5"/></g></symbol>
+  <symbol id="i-cell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="12" rx="9.5" ry="7.5"/><circle cx="10" cy="11" r="2.8"/><circle cx="16.2" cy="14.2" r="1"/><circle cx="15.5" cy="8.6" r=".8"/></g></symbol>
   <symbol id="i-uvvis" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 15 16H3Z"/><path d="M1.5 10.5H6M12 10.5l9-4M12 10.5h9M12 10.5l9 4"/></g></symbol>
 </svg>
 
@@ -426,35 +416,18 @@
     <ul>
       <li><a class="nl" href="#poster"><b>1</b>Poster</a></li>
       <li><a class="nl" href="#lab"><b>2</b>Lab work</a></li>
-      <li><a class="nl" href="#model"><b>3</b>3D model</a></li>
+      <li><a class="nl" href="#model"><b>3</b>3D animation</a></li>
       <li><a class="nl" href="#data"><b>4</b>Data</a></li>
       <li><a class="nl" href="#literature"><b>5</b>Published images</a></li>
-      <li><a class="nl" href="#contact"><b>6</b>Contact</a></li>
-      <li><a class="nl" href="#references"><b>7</b>References</a></li>
+      <li><a class="nl" href="#future"><b>6</b>Future</a></li>
+      <li><a class="nl" href="#contact"><b>7</b>Contact</a></li>
+      <li><a class="nl" href="#references"><b>8</b>References</a></li>
     </ul>
     <a class="btn btn-light dl" href="poster.pdf" download="CQD-dye-treatment-poster.pdf" aria-label="Download poster PDF"><svg><use href="#i-dl"/></svg><span>Poster</span></a>
   </div>
 </nav>
 
 <main id="main">
-
-  <div class="result" role="region" aria-labelledby="result-label">
-    <p class="kicker" id="result-label">The surprising result</p>
-    <div class="result-stats">
-      <div class="stat stat-1" role="group" aria-label="51% of the dye removed by H2O2 and UV alone in 30 minutes">
-        <span class="big" aria-hidden="true"><span data-count="51">51</span>%</span>
-        <span class="cap" aria-hidden="true">of the dye removed by H₂O₂ + UV alone in 30 min</span>
-        <div class="rbar" aria-hidden="true"><i></i></div>
-      </div>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <div class="stat stat-2" role="group" aria-label="10 to 12% removed once plain CQDs were added">
-        <span class="big" aria-hidden="true"><span data-count="10">10</span>&ndash;<span data-count="12">12</span>%</span>
-        <span class="cap" aria-hidden="true">removed once plain CQDs were added</span>
-        <div class="rbar" aria-hidden="true"><i></i></div>
-      </div>
-    </div>
-    <p class="ctx">We expected CQDs to speed the breakdown up. Under our conditions they seem to have slowed it. <a href="#data">See the data &rarr;</a></p>
-  </div>
 
   <!-- 1 OVERVIEW -->
   <section id="poster">
@@ -473,10 +446,11 @@
         </div>
         <ul class="adds" aria-label="What this site adds">
           <li><a href="#lab">Lab photos</a></li>
-          <li><a href="#model">3D model</a></li>
+          <li><a href="#model">3D animation</a></li>
           <li><a href="#data">Every data point</a></li>
           <li><a href="#data">4 extra charts</a></li>
           <li><a href="#literature">Published CQD images</a></li>
+          <li><a href="#future">Future implementation</a></li>
           <li><a href="#contact">Contact us</a></li>
         </ul>
       </div>
@@ -490,26 +464,7 @@
     <div class="timeline">
       <div class="tl-step">
         <span class="tl-dot" aria-hidden="true">1</span>
-        <div class="tl-media">
-          <!-- TODO: replace with a photo of the beaker in the microwave when available -->
-          <div class="method" role="img" aria-label="Illustration of a beaker in a microwave. Recipe: 2 grams citric acid, 20 millilitres water, microwave for 8 minutes.">
-            <svg viewBox="0 0 160 100" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="6" y="10" width="148" height="80" rx="8"/>
-              <rect x="14" y="18" width="100" height="64" rx="4"/>
-              <line x1="124" y1="24" x2="124" y2="76"/>
-              <circle cx="139" cy="32" r="5"/>
-              <circle cx="139" cy="52" r="5"/>
-              <line x1="134" y1="70" x2="144" y2="70"/>
-              <path d="M54 34 V42 L46 74 Q45 78 49 78 H79 Q83 78 82 74 L74 42 V34 M51 34 H77"/>
-              <path d="M49 62 H79 L81.6 73 Q82.6 76.8 79 76.8 H49 Q45.4 76.8 46.4 73 Z" fill="var(--dot, #f0913a)" stroke="var(--dot, #f0913a)"/>
-            </svg>
-            <ul>
-              <li><b>2 g</b> citric acid</li>
-              <li><b>20 mL</b> water</li>
-              <li>Microwave · <b>8 min</b></li>
-            </ul>
-          </div>
-        </div>
+        <div class="tl-media"><img class="zoom" src="img/weighing-citric-acid.jpg" style="object-position: 50% 58%" alt="Citric acid crystals in a glass beaker on a digital balance, with a stirring rod"></div>
         <div class="tl-body">
           <h3><span class="vh">Step 1: </span>Making the carbon dots</h3>
           <p>2 g citric acid dissolved in 20 mL water, then microwaved for 8 minutes.</p>
@@ -562,15 +517,15 @@
   <!-- 3 3D MODEL -->
   <section id="model">
     <div class="sh"><span class="hex">3</span><h2>See it in 3D</h2></div>
-    <p class="lede">An interactive model of a carbon quantum dot, an animation of its layers, and a one-minute video on how CQDs break down dye.</p>
-    <div class="stage3d">
-      <model-viewer src="media/cqd-model.glb" alt="3D model of a carbon quantum dot" camera-controls touch-action="pan-y"
-        auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" shadow-intensity="0" exposure="1.1"
-        environment-image="neutral" interaction-prompt="none" loading="lazy">
-        <div class="mv-hint" slot="poster">Loading 3D model...</div>
-      </model-viewer>
-      <span class="mv-help">Drag to rotate · pinch or scroll to zoom</span>
-    </div>
+    <p class="lede">A diagram of a carbon quantum dot's surface chemistry, an animation of its layers, and a one-minute video on how CQDs break down dye.</p>
+    <figure class="card diagram">
+      <h3>A CQD's surface groups at work</h3>
+      <div class="diagram-img">
+        <img class="zoom" src="img/cqd-silver-glucose.png" width="372" height="200"
+          alt="Reaction diagram. A carbon quantum dot with –OH, –COOH and –NH₂ surface groups absorbs 340 nm light and emits 441 nm light. At pH 7.5 a silver ion binds to its –NH₂ groups. Glucose, at pH 7.5 and 60 °C for 10 minutes, reduces the silver ion to silver metal and becomes gluconic acid.">
+      </div>
+      <figcaption>The CQD's surface carries –OH, –COOH and –NH<sub>2</sub> groups. It absorbs light at 340 nm and glows at 441 nm. Silver ions (Ag<sup>+</sup>) bind to the –NH<sub>2</sub> groups, and glucose then reduces them to silver metal while turning into gluconic acid.</figcaption>
+    </figure>
     <div class="grid-2 vids">
       <figure class="card">
         <h3>Inside a CQD</h3>
@@ -746,9 +701,56 @@
     </div>
   </section>
 
-  <!-- 6 CONTACT -->
+  <!-- 6 FUTURE IMPLEMENTATION -->
+  <section id="future">
+    <div class="sh"><span class="hex">6</span><h2>Future implementation</h2></div>
+    <p class="lede">Where our research could go next, and where carbon dots could be used outside the lab.</p>
+    <h3 class="fut-h">Future research</h3>
+    <ol class="fut fut-research">
+      <li class="card">
+        <span class="fut-num" aria-hidden="true">1</span>
+        <h4>Identify the active species</h4>
+        <p>Radical scavengers, such as isopropanol for •OH and benzoquinone for superoxide, could show which radicals are mainly responsible for breaking down the dye.</p>
+      </li>
+      <li class="card">
+        <span class="fut-num" aria-hidden="true">2</span>
+        <h4>CQD composites</h4>
+        <p>Pairing CQDs with a semiconductor such as TiO₂ may improve charge separation and boost photocatalytic activity (Wang et al., 2017).</p>
+      </li>
+      <li class="card">
+        <span class="fut-num" aria-hidden="true">3</span>
+        <h4>Synthesis and doping</h4>
+        <p>Adjusting the microwave time, urea ratio or co-dopants could show which CQD properties make them most effective (Yashwanth et al., 2020).</p>
+      </li>
+    </ol>
+    <h3 class="fut-h">Potential applications</h3>
+    <ul class="fut fut-apps">
+      <li class="card">
+        <span class="tech-ic" aria-hidden="true"><svg><use href="#i-water"/></svg></span>
+        <h4>Low-cost wastewater treatment</h4>
+        <p>CQDs are made from inexpensive, low-toxicity precursors, like the citric acid we used (Qu et al., 2012).</p>
+      </li>
+      <li class="card">
+        <span class="tech-ic" aria-hidden="true"><svg><use href="#i-sun"/></svg></span>
+        <h4>Sunlight-driven purification</h4>
+        <p>CQDs can absorb visible light, not just UV, so sunlight could drive the clean-up (Wang et al., 2017).</p>
+      </li>
+      <li class="card">
+        <span class="tech-ic" aria-hidden="true"><svg><use href="#i-sense"/></svg></span>
+        <h4>Pollutant sensing</h4>
+        <p>CQD fluorescence, the green glow in <a href="#lab">Step 3</a>, could be used to detect pollutants in water (Lim et al., 2015).</p>
+      </li>
+      <li class="card">
+        <span class="tech-ic" aria-hidden="true"><svg><use href="#i-cell"/></svg></span>
+        <h4>Safer bioimaging</h4>
+        <p>Fluorescent, low-toxicity CQDs offer an alternative to heavy-metal quantum dots (Lim et al., 2015).</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 7 CONTACT -->
   <section id="contact">
-    <div class="sh"><span class="hex">6</span><h2>Contact</h2></div>
+    <div class="sh"><span class="hex">7</span><h2>Contact</h2></div>
     <p class="lede">Feel free to email us for any questions or collaboration.</p>
     <div class="team">
       <div class="card person">
@@ -775,9 +777,9 @@
     </div>
   </section>
 
-  <!-- 7 REFERENCES -->
+  <!-- 8 REFERENCES -->
   <section id="references">
-    <div class="sh"><span class="hex">7</span><h2>References</h2></div>
+    <div class="sh"><span class="hex">8</span><h2>References</h2></div>
     <div class="card">
       <ul class="refs">
         <li>Chen, W., Ball, A. S., Cole, I., &amp; Yin, H. (2025). Metal-doped carbon dots as Fenton-like catalysts and their applications in pollutant degradation and sensing. <i>Sustainability, 17</i>(8), Article 3642. <a href="https://doi.org/10.3390/su17083642">doi.org/10.3390/su17083642</a></li>
@@ -797,12 +799,11 @@
 <footer>
   Seara Ng, Tian Yu &amp; Jun Qi Lee · John Monash Science School · Australian Science Fair<br>
   <a href="poster.pdf" download="CQD-dye-treatment-poster.pdf">Download the poster (PDF)</a> · <a href="#contact">Contact</a><br>
-  <span class="foot-meta">Thanks to John Monash Science School for supporting this project. · Last updated <time datetime="2026-11-15">15 November 2026</time></span>
+  <span class="foot-meta">Thanks to John Monash Science School for supporting this project. · Last updated <time datetime="2026-11-19">19 November 2026</time></span>
 </footer>
 
 <dialog id="lightbox"><img alt=""></dialog>
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js" integrity="sha384-Ftcjj/GNLxPvzNDftO/oryXB9aGxsGZY9JGqsXG0uUKgQDl9RfDgsx9NJ/4IVNPe" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js" integrity="sha384-dug+JxfBvklEQdJ4AYuBBAIScUz0bVN73xpy273gcAwHjb3qI0fXmuYNaNfdyYJG" crossorigin="anonymous"></script>
 <script>
 /* ===== DATA: from "EEI Data - Organised.xlsx" (SPARKvue colorimeter exports, 13–15 Oct 2026) ===== */
@@ -863,25 +864,6 @@ const nRemoved = 100 * (1 - nA / nB), nRemovedSd = 100 * sd(DATA.ncqd.after) / n
   rows.push(row('14 Oct', 'D', 'MB + 3% H₂O₂ + 1 mL N-CQD, after UV', DATA.ncqd.after, nA, pct(nRemoved, nRemovedSd)));
   DATA.ncqdAmount.forEach(e => rows.push(row('15 Oct', 'E', `MB + ${e.vol} mL N-CQD, before H₂O₂ + UV`, [e.a650], e.a650, '–')));
   document.querySelector('#raw tbody').innerHTML = rows.join('');
-})();
-
-/* ===== results count-up ===== */
-(() => {
-  const els = document.querySelectorAll('.result [data-count]');
-  if (!els.length || matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-  const io = new IntersectionObserver(entries => {
-    if (!entries.some(e => e.isIntersecting)) return;
-    io.disconnect();
-    const t0 = performance.now(), dur = 1100;
-    const step = now => {
-      const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
-      els.forEach(el => { el.textContent = Math.round(+el.dataset.count * k); });
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, { threshold: 0.5 });
-  els.forEach(el => { el.textContent = '0'; });   // HTML holds the final numbers for no-JS / reduced motion
-  io.observe(document.querySelector('.result'));
 })();
 
 /* ===== lightbox ===== */
@@ -1229,7 +1211,7 @@ showTab('removed');
 // fade cards in as they scroll into view (only hidden once JS has added html.motion)
 (() => {
   if (reduceMotion || !('IntersectionObserver' in window)) return;
-  const els = document.querySelectorAll('.card, .glance > div, .tl-step, .lit figure, .result');
+  const els = document.querySelectorAll('.card, .glance > div, .tl-step, .lit figure');
   const done = el => setTimeout(() => { el.classList.remove('reveal-ready'); el.style.transitionDelay = ''; }, 800);
   const io = new IntersectionObserver(es => {
     let n = 0;
@@ -1258,9 +1240,6 @@ showTab('removed');
   }), { threshold: 0.4 });
   vids.forEach(v => io.observe(v));
 })();
-document.querySelectorAll('model-viewer').forEach(mv => {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) mv.removeAttribute('auto-rotate');
-});
 </script>
 </body>
 </html>
